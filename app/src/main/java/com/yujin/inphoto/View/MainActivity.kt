@@ -1,7 +1,8 @@
-package com.example.inphoto
+package com.yujin.inphoto.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.yujin.inphoto.R
 
 class MainActivity : AppCompatActivity() {
 
