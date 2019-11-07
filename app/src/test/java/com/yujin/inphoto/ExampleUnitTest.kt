@@ -1,4 +1,4 @@
-package com.example.inphoto
+package com.yujin.inphoto
 
 import org.junit.Test
 
