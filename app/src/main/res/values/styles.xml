@@ -11,4 +11,33 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="CustomEditText" parent="@android:style/Widget.EditText">
+        <item name="android:background">@drawable/single_line_edittext</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="IdEditText" parent="@android:style/Widget.EditText">
+        <item name="android:background">@drawable/single_line_edittext</item>
+        <item name="android:inputType">textEmailAddress</item>
+        <item name="android:hint">@string/email</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="PasswordEditText" parent="@android:style/Widget.EditText">
+        <item name="android:background">@drawable/single_line_edittext</item>
+        <item name="android:inputType">textPassword</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="inputFieldTextView" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">13dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+    </style>
+
+    <style name="CustomButton" parent="@android:style/Widget.Button">
+        <item name="android:textSize">17dp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:background">@drawable/confirm_button</item>
+    </style>
 </resources>
