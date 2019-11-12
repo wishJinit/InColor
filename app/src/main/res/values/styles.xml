@@ -16,7 +16,7 @@
         <item name="android:lines">1</item>
     </style>
 
-    <style name="IdEditText" parent="@android:style/Widget.EditText">
+    <style name="EmailEditText" parent="@android:style/Widget.EditText">
         <item name="android:background">@drawable/single_line_edittext</item>
         <item name="android:inputType">textEmailAddress</item>
         <item name="android:hint">@string/email</item>
