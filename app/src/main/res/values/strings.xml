@@ -3,9 +3,12 @@
 
     <string name="sign_up_italic"><u>회원가입</u></string>
     <string name="find_password_italic"><u>비밀번호찾기</u></string>
+    <string name="sign_up">회원가입</string>
     <string name="find_password">비밀번호찾기</string>
     <string name="sign_in">로그인</string>
     <string name="password">비밀번호</string>
+    <string name="check_password">비밀번호 확인</string>
     <string name="email">이메일</string>
     <string name="id">아이디</string>
+    <string name="name">이름</string>
 </resources>
