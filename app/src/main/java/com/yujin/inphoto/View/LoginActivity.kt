@@ -1,21 +1,25 @@
 package com.yujin.inphoto.View
 
+import android.content.Intent
 import android.view.View
 import android.widget.Toast
-import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProviders
 import com.yujin.inphoto.Base.BaseActivity
 import com.yujin.inphoto.R
+import com.yujin.inphoto.Util.ConfirmUtil
 import com.yujin.inphoto.ViewModel.MemberViewModel
+import com.yujin.inphoto.databinding.ActivityLoginBinding
 import kotlinx.android.synthetic.main.activity_login.*
-import java.util.regex.Pattern
 
 
-class LoginActivity : BaseActivity<ViewDataBinding, MemberViewModel>() {
-    override var baseViewModel = MemberViewModel()
+class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
+    override lateinit var viewModel: MemberViewModel
     override val layoutResourceId: Int
         get() = R.layout.activity_login
 
-    override fun initSetting() {}
+    override fun initSetting() {
+        viewModel = ViewModelProviders.of(this)[MemberViewModel::class.java]
+    }
 
     override fun setDataBinding() {}
 
@@ -26,38 +30,39 @@ class LoginActivity : BaseActivity<ViewDataBinding, MemberViewModel>() {
     // Event Listener 설정
     private fun setEventListener(){
         login_button.setOnClickListener {
-            if (!checkInputField()){
-                Toast.makeText(this, "ID/PW를 입력해주세요", Toast.LENGTH_SHORT).show()
-            } else if(!isEmailValid(id_edit_text.text.toString())){
-                Toast.makeText(this, "유효한 이메일을 입력해주세요", Toast.LENGTH_SHORT).show()
+            val id = id_edit_text.text.toString()
+            val pw = pw_edit_text.text.toString()
+
+            if (ConfirmUtil.isEmptyField(id, pw)){
+                Toast.makeText(this, "ID/PW를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            } else if(!ConfirmUtil.isEmailValid(id)){
+                Toast.makeText(this, "올바른 이메일 형식이 아닙니다.", Toast.LENGTH_SHORT).show()
             } else {
                 checkLogin()
             }
         }
+
+
     }
 
-    // id, pw 필드 입력 체크
-    private fun checkInputField() = id_edit_text.text.toString().isNotEmpty() && pw_edit_text.text.toString().isNotEmpty()
-
-    // 이메일 유효성 검사
-    private fun isEmailValid(email: String): Boolean {
-        val regExpn = ("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$")
-
-        val pattern = Pattern.compile(regExpn, Pattern.CASE_INSENSITIVE)
-        val matcher = pattern.matcher(email)
-
-        return matcher.matches()
-    }
-
-    // 계정 체크
+    // 로그인
     private fun checkLogin(){
         showProgressBar()
-        hideProgressBar()
+        val id = id_edit_text.text.toString()
+        val pw = pw_edit_text.text.toString()
+        viewModel.singIn(id, pw)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
+                }
+                hideProgressBar()
+            }
     }
 
     private fun showProgressBar(){
