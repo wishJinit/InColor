@@ -50,19 +50,20 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
         showProgressBar()
         val id = id_edit_text.text.toString()
         val pw = pw_edit_text.text.toString()
-        viewModel.singIn(id, pw)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+        viewModel.singIn(id, pw,
+            {
+                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
 
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
-                }
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            },
+            {
+                Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
+            },
+            {
                 hideProgressBar()
-            }
+            })
     }
 
     private fun showProgressBar(){

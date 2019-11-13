@@ -7,18 +7,30 @@ class FirebaseService {
     private var auth:FirebaseAuth = FirebaseAuth.getInstance()
 
     // 회원가입
-    fun createUser(name:String, email: String, pw: String): Task<AuthResult> {
-        return auth.createUserWithEmailAndPassword(email, pw)
+    fun createUser(name:String, email: String, pw: String, success:()->Unit, fail:() -> Unit, finally:() -> Unit) {
+        auth.createUserWithEmailAndPassword(email, pw)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     setName(name)
+                    success()
+                } else {
+                    fail()
                 }
+                finally()
             }
     }
 
     // 로그인
-    fun signIn(email:String, pw:String): Task<AuthResult> {
-        return auth.signInWithEmailAndPassword(email, pw)
+    fun signIn(email:String, pw:String, success:()->Unit, fail:() -> Unit, finally:() -> Unit) {
+        auth.signInWithEmailAndPassword(email, pw)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    success()
+                } else {
+                    fail()
+                }
+                finally()
+            }
     }
 
     // 현재 로그인된 사용자

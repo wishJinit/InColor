@@ -15,21 +15,20 @@ class MemberViewModel : BaseViewModel(){
     val userVO: LiveData<UserVO?>
         get() = _userVO
 
-    fun singUp(name:String, email:String, pw:String): Task<AuthResult>{
-        return firebaseService.createUser(name, email, pw)
+    fun singUp(name:String, email:String, pw:String, success:()->Unit, fail:()->Unit, finally:()->Unit){
+        firebaseService.createUser(name, email, pw, success, fail, finally)
     }
 
-    fun singIn(email:String, pw:String): Task<AuthResult>{
-        return firebaseService.signIn(email, pw)
-            .addOnCompleteListener {
-                if (it.isSuccessful){
-                    val currentUser = firebaseService.getCurrentUser()!!
-                    val curId = currentUser.uid
-                    val curName = currentUser.displayName?: ""
-                    val curEmail = currentUser.email?: ""
+    fun singIn(email:String, pw:String, success:()->Unit, fail:()->Unit, finally:()->Unit){
+        firebaseService.signIn(email, pw, {
+            val currentUser = firebaseService.getCurrentUser()!!
+            val curId = currentUser.uid
+            val curName = currentUser.displayName ?: ""
+            val curEmail = currentUser.email ?: ""
+            _userVO.value = UserVO(curId, curName, curEmail)
 
-                    _userVO.value = UserVO(curId, curName, curEmail)
-                }
-            }
+            success()
+        }, fail, finally)
+    }
     }
 }
