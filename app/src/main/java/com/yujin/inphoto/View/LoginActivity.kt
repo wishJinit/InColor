@@ -1,4 +1,4 @@
-package com.yujin.inphoto.View
+package com.yujin.inphoto.view
 
 import android.content.Intent
 import android.view.View

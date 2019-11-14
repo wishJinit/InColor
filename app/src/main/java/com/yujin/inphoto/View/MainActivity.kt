@@ -1,4 +1,4 @@
-package com.yujin.inphoto.View
+package com.yujin.inphoto.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
