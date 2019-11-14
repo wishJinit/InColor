@@ -15,7 +15,7 @@ class MemberViewModel : BaseViewModel(){
     val userVO: LiveData<UserVO?>
         get() = _userVO
 
-    fun singUp(name:String, email:String, pw:String, success:()->Unit, fail:()->Unit, finally:()->Unit){
+    fun signUp(name:String, email:String, pw:String, success:()->Unit, fail:()->Unit, finally:()->Unit){
         firebaseService.createUser(name, email, pw, success, fail, finally)
     }
 
