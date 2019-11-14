@@ -40,4 +40,10 @@
         <item name="android:layout_margin">20dp</item>
         <item name="android:background">@drawable/confirm_button</item>
     </style>
+
+    <style name="SmallCustomButton" parent="@android:style/Widget.Button">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@drawable/small_button_normal</item>
+    </style>
 </resources>

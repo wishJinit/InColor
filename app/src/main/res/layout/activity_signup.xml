@@ -72,11 +72,33 @@
                         android:text="@string/id"
                         style="@style/inputFieldTextView" />
 
-                    <EditText
-                        android:id="@+id/id_edit_text"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        style="@style/EmailEditText"/>
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/id_edit_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_toLeftOf="@+id/check_email_btn"
+                            style="@style/EmailEditText"/>
+
+                        <Button
+                            android:id="@+id/check_email_btn"
+                            android:layout_width="70dp"
+                            android:layout_height="35dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:text="@string/check_email"
+                            style="@style/SmallCustomButton"/>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/check_email_result_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
                 </LinearLayout>
 
                 <LinearLayout
