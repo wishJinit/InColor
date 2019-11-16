@@ -48,6 +48,35 @@ class SignupActivity : BaseActivity<ActivitySignupBinding, MemberViewModel>() {
         }
 
         check_email_btn.setOnClickListener {
+            val id = id_edit_text.text.toString()
+            val resultTextView = check_email_result_text_view
+            resultTextView.visibility = View.VISIBLE
+
+            if (ConfirmUtil.isEmptyField(id)) {
+                resultTextView.setText(R.string.notify_fill_out_email)
+            } else if (!ConfirmUtil.isEmailValid(id)){
+                resultTextView.setText(R.string.notify_check_email)
+            } else {
+                showProgressBar()
+                disableButton(it)
+                viewModel.checkEmail(id,
+                    {
+                        resultTextView.setText(R.string.notify_able_sign_up)
+                        isCheckEmail = true
+                    },
+                    {
+                        resultTextView.setText(R.string.notify_unable_sign_up)
+                        isCheckEmail = false
+                    },
+                    {
+                        resultTextView.setText(R.string.notify_check_fail)
+                        isCheckEmail = false
+                    },
+                    {
+                        hideProgressBar()
+                        enableButton(it)
+                    })
+            }
         }
 
         back_btn.setOnClickListener {
