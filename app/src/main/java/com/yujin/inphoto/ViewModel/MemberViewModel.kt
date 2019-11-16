@@ -30,5 +30,9 @@ class MemberViewModel : BaseViewModel(){
             success()
         }, fail, finally)
     }
+
+    fun checkEmail(email:String, notExisting:()->Unit, alreadyExisting:()->Unit, fail:()->Unit, finally:()->Unit){
+        firebaseService.checkEmail(email, notExisting, alreadyExisting, fail, finally)
+    }
     }
 }

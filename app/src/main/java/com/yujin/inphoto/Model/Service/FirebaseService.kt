@@ -38,6 +38,22 @@ class FirebaseService {
         return auth.currentUser
     }
 
+    // 이메일 중복 체크
+    fun checkEmail(email: String, notExisting:()->Unit, alreadyExisting:()->Unit, fail:()->Unit, finally:()->Unit){
+        auth.fetchSignInMethodsForEmail(email)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    if(it.result?.signInMethods?.contains(EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD) == true){
+                        alreadyExisting()
+                    } else {
+                        notExisting()
+                    }
+                } else {
+                    fail()
+                }
+                finally()
+            }
+    }
     // 이름설정
     private fun setName(name:String){
         val user = auth.currentUser
