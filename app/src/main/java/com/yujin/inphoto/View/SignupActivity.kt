@@ -43,7 +43,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding, MemberViewModel>() {
             } else if (!isCheckEmail){
                 Toast.makeText(this, "이메일 중복확인을 해주세요.", Toast.LENGTH_SHORT).show()
             } else {
-                createUser()
+                createUser(it)
             }
         }
 
@@ -57,8 +57,9 @@ class SignupActivity : BaseActivity<ActivitySignupBinding, MemberViewModel>() {
 
     private fun checkPassword() = pw_edit_text.text.toString() == check_pw_edit_text.text.toString()
 
-    private fun createUser(){
+    private fun createUser(btn:View){
         showProgressBar()
+        disableButton(btn)
 
         val name = name_edit_text.text.toString()
         val id = id_edit_text.text.toString()
@@ -74,7 +75,16 @@ class SignupActivity : BaseActivity<ActivitySignupBinding, MemberViewModel>() {
             },
             {
                 hideProgressBar()
+                enableButton(btn)
             })
+    }
+
+    private fun enableButton(btn:View){
+        btn.isEnabled = true
+    }
+
+    private fun disableButton(btn:View){
+        btn.isEnabled = false
     }
 
     private fun showProgressBar(){

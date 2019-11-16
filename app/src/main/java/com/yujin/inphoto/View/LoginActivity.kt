@@ -38,7 +38,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
             } else if(!ConfirmUtil.isEmailValid(id)){
                 Toast.makeText(this, "올바른 이메일 형식이 아닙니다.", Toast.LENGTH_SHORT).show()
             } else {
-                checkLogin()
+                checkLogin(it)
             }
         }
 
@@ -46,24 +46,39 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
     }
 
     // 로그인
-    private fun checkLogin(){
+    private fun checkLogin(btn:View){
         showProgressBar()
+        disableButton(btn)
+
         val id = id_edit_text.text.toString()
         val pw = pw_edit_text.text.toString()
         viewModel.singIn(id, pw,
             {
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
 
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                successSignUp()
             },
             {
                 Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
             },
             {
                 hideProgressBar()
+                enableButton(btn)
             })
+    }
+
+    private fun successSignUp(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun enableButton(btn:View){
+        btn.isEnabled = true
+    }
+
+    private fun disableButton(btn:View){
+        btn.isEnabled = false
     }
 
     private fun showProgressBar(){
