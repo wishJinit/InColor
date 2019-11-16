@@ -29,6 +29,10 @@ class MemberViewModel : BaseViewModel(){
         }, fail, finally)
     }
 
+    fun sendPasswordResetEmail(email:String, success:()->Unit, fail:()->Unit, finally:()->Unit){
+        firebaseService.sendPasswordResetEmail(email, success, fail, finally)
+    }
+
     fun checkEmail(email:String, notExisting:()->Unit, alreadyExisting:()->Unit, fail:()->Unit, finally:()->Unit){
         firebaseService.checkEmail(email, notExisting, alreadyExisting, fail, finally)
     }

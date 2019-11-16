@@ -42,7 +42,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
             }
         }
 
+        // 회원가입 Activity 이동
+        create_user_tv.setOnClickListener {
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
 
+        // 비밀번호 찾기 Activity 이동
+        find_password_tv.setOnClickListener {
+            val intent = Intent(this, FindPasswordActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     // 로그인

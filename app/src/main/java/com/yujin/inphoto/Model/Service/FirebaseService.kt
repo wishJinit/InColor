@@ -54,6 +54,20 @@ class FirebaseService {
                 finally()
             }
     }
+
+    // 이메일 비밀번호 리셋
+    fun sendPasswordResetEmail(email: String, success:()->Unit, fail:()->Unit, finally:()->Unit){
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener {
+                if (it.isSuccessful){
+                    success()
+                } else {
+                    fail()
+                }
+                finally()
+            }
+    }
+
     // 이름설정
     private fun setName(name:String){
         val user = auth.currentUser
