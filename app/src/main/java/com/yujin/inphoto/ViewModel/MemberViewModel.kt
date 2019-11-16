@@ -2,8 +2,6 @@ package com.yujin.inphoto.ViewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.yujin.inphoto.Base.BaseViewModel
 import com.yujin.inphoto.Model.Service.FirebaseService
 import com.yujin.inphoto.Model.VO.UserVO
