@@ -119,6 +119,21 @@
                     android:src="@drawable/my_page_btn" />
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/sign_out_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="13dp"
+                android:onClick="@{activity::clickMenuBtn}">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/sign_out_btn" />
+            </RelativeLayout>
+
         </LinearLayout>
     </RelativeLayout>
 </layout>
