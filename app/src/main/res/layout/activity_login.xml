@@ -60,27 +60,55 @@
                     style="@style/PasswordEditText"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
                 android:layout_margin="5dp"
                 >
-                <TextView
-                    android:id="@+id/create_user_tv"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp"
-                    android:text="@string/sign_up_italic"
-                    />
-                <TextView
-                    android:id="@+id/find_password_tv"
+                    android:layout_alignParentLeft="true">
+                    <TextView
+                        android:id="@+id/create_user_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:textSize="13dp"
+                        android:text="@string/sign_up_italic"
+                        />
+                    <TextView
+                        android:id="@+id/find_password_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:textSize="13dp"
+                        android:text="@string/find_password_italic"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/auto_sign_in_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp"
-                    android:text="@string/find_password_italic"
-                    />
-            </LinearLayout>
+                    android:layout_alignParentRight="true">
+                    <CheckBox
+                        android:id="@+id/auto_sign_in_check_box"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center_vertical"
+                        android:button="@null"
+                        android:background="@drawable/check_box"
+                        android:checked="false"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="7dp"
+                        android:textSize="13dp"
+                        android:text="@string/auto_sign_in"
+                        />/>
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
 
         </LinearLayout>
