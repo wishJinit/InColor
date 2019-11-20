@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.yujin.inphoto.Base.BaseActivity
 import com.yujin.inphoto.R
 import com.yujin.inphoto.Util.ConfirmUtil
+import com.yujin.inphoto.Util.DLog
 import com.yujin.inphoto.ViewModel.MemberViewModel
 import com.yujin.inphoto.databinding.ActivityLoginBinding
 import kotlinx.android.synthetic.main.activity_login.*
@@ -19,6 +20,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
 
     override fun initSetting() {
         viewModel = ViewModelProviders.of(this)[MemberViewModel::class.java]
+        viewModel.autoSignIn(this) {
+            successSignIn()
+        }
     }
 
     override fun setDataBinding() {}
@@ -53,6 +57,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
             val intent = Intent(this, FindPasswordActivity::class.java)
             startActivity(intent)
         }
+
+        auto_sign_in_layout.setOnClickListener {
+            auto_sign_in_check_box.isChecked = !auto_sign_in_check_box.isChecked
+        }
     }
 
     // 로그인
@@ -64,9 +72,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
         val pw = pw_edit_text.text.toString()
         viewModel.singIn(id, pw,
             {
+                if (auto_sign_in_check_box.isChecked) {
+                    DLog.d("AutoLogin")
+                    viewModel.setAutoSignIn(this)
+                }
 
                 Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                successSignUp()
+                successSignIn()
             },
             {
                 Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
@@ -77,7 +89,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
             })
     }
 
-    private fun successSignUp(){
+    private fun successSignIn(){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()

@@ -1,10 +1,12 @@
 package com.yujin.inphoto.ViewModel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yujin.inphoto.Base.BaseViewModel
 import com.yujin.inphoto.Model.Service.FirebaseService
 import com.yujin.inphoto.Model.VO.UserVO
+import com.yujin.inphoto.Util.SaveSharedPreference
 
 
 class MemberViewModel : BaseViewModel(){
@@ -36,5 +38,19 @@ class MemberViewModel : BaseViewModel(){
     fun checkEmail(email:String, notExisting:()->Unit, alreadyExisting:()->Unit, fail:()->Unit, finally:()->Unit){
         firebaseService.checkEmail(email, notExisting, alreadyExisting, fail, finally)
     }
+
+    fun setAutoSignIn(context: Context){
+        SaveSharedPreference.setAutoSignIn(context)
     }
+
+    fun isAutoSignIn(context: Context): Boolean{
+        return SaveSharedPreference.isAutoSignIn(context)
+    }
+
+    fun autoSignIn(context: Context, doSignIn:() -> Unit){
+        if (isAutoSignIn(context)){
+            doSignIn()
+        }
+    }
+
 }
