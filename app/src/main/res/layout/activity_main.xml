@@ -15,55 +15,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!--Top Menu-->
-        <LinearLayout
-            android:id="@+id/top_menu_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/border_bottom"
-            android:padding="15dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="7dp"
-                    android:text="2019년 11월"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="18dp" />
-
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/change_date_btn" />
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/menu_btn" />
-            </RelativeLayout>
-        </LinearLayout>
-
         <!--Contents View-->
         <ScrollView
-            android:id="@+id/contents_view_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/bottom_menu_main"
-            android:layout_below="@id/top_menu_main">
+            android:layout_alignParentTop="true">
+            <FrameLayout
+                android:id="@+id/contents_view_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+            </FrameLayout>
         </ScrollView>
 
         <!--Bottom Menu-->
