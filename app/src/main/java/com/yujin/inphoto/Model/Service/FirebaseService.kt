@@ -1,6 +1,5 @@
 package com.yujin.inphoto.Model.Service
 
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 
 class FirebaseService {
@@ -66,6 +65,10 @@ class FirebaseService {
                 }
                 finally()
             }
+    }
+
+    fun signOut(){
+        auth.signOut()
     }
 
     // 이름설정

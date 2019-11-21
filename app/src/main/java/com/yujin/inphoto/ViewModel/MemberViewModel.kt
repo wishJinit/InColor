@@ -47,9 +47,24 @@ class MemberViewModel : BaseViewModel(){
         return SaveSharedPreference.isAutoSignIn(context)
     }
 
+    fun clearAutoSignIn(context: Context){
+        SaveSharedPreference.clearAutoSignIn(context)
+    }
+
     fun autoSignIn(context: Context, doSignIn:() -> Unit){
         if (isAutoSignIn(context)){
             doSignIn()
+        }
+    }
+
+    fun signOut(context: Context){
+        clearAutoSignIn(context)
+        firebaseService.signOut()
+    }
+
+    fun autoSignOut(context: Context) {
+        if (!isAutoSignIn(context)) {
+            signOut(context)
         }
     }
 

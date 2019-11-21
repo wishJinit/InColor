@@ -23,4 +23,11 @@ object SaveSharedPreference {
     fun isAutoSignIn(context: Context): Boolean {
         return getSharedPreferences(context).getBoolean(AUTO_SIGN_IN, false)
     }
+
+    // 로그아웃
+    fun clearAutoSignIn(context: Context) {
+        val editor = getSharedPreferences(context).edit()
+        editor.putBoolean(AUTO_SIGN_IN, false)
+        editor.apply()
+    }
 }

@@ -30,9 +30,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MemberViewModel>() {
     override fun afterDataBinding() {
     }
 
-    fun clickMenuBtn(v:View) {
-        when (v.id) {
+    fun clickMenuBtn(v:View){
+        when(v.id){
+            sign_out_btn.id -> signOut()
         }
     }
 
+    private fun signOut(){
+        viewModel.clearAutoSignIn(this)
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+     }
 }
