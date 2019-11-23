@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment.DiaryFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--Top Menu-->
+        <LinearLayout
+            android:id="@+id/top_menu_diary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#D2BE96"
+            android:padding="15dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/select_date_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="7dp"
+                    android:text="2019년 11월"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18dp" />
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/change_date_btn" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/menu_btn" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!--Week Layout-->
+        <LinearLayout
+            android:id="@+id/week_name_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/top_menu_diary">
+            <TextView
+                android:text="@string/sunday"
+                android:textColor="@color/colorRed"
+                style="@style/WeekNameTextView"/>
+            <TextView
+                android:text="@string/monday"
+                android:textColor="@color/colorBlack"
+                style="@style/WeekNameTextView"/>
+            <TextView
+                android:text="@string/tuesday"
+                android:textColor="@color/colorBlack"
+                style="@style/WeekNameTextView"/>
+            <TextView
+                android:text="@string/wednesday"
+                android:textColor="@color/colorBlack"
+                style="@style/WeekNameTextView"/>
+            <TextView
+                android:text="@string/thursday"
+                android:textColor="@color/colorBlack"
+                style="@style/WeekNameTextView"/>
+            <TextView
+                android:text="@string/friday"
+                android:textColor="@color/colorBlack"
+                style="@style/WeekNameTextView"/>
+            <TextView
+                android:text="@string/saturday"
+                android:textColor="@color/colorBlue"
+                style="@style/WeekNameTextView"/>
+        </LinearLayout>
+
+        <!--Calendar Layout-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/calendar_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/week_name_layout"
+            android:layout_alignParentBottom="true"
+            android:scrollbarFadeDuration="0"
+            android:scrollbarSize="5dp" />
+    </RelativeLayout>
+</FrameLayout>
