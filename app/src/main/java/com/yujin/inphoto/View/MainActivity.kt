@@ -15,6 +15,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MemberViewModel>() {
     override lateinit var viewModel: MemberViewModel
     override val layoutResourceId: Int
         get() = R.layout.activity_main
+    
+    private lateinit var selectedMenuBtn: View
 
     override fun onDestroy() {
         viewModel.autoSignOut(this)
@@ -24,6 +26,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MemberViewModel>() {
     override fun initSetting() {
         viewModel = ViewModelProviders.of(this)[MemberViewModel::class.java]
         changeContentView(DiaryFragment())
+
+        selectedMenuBtn = diary_btn
+        selectedMenuBtn.isSelected = true
     }
 
     override fun setDataBinding() {
@@ -34,6 +39,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MemberViewModel>() {
     }
 
     fun clickMenuBtn(v:View){
+        selectedMenuBtn.isSelected = false
+
+        selectedMenuBtn = v
+        selectedMenuBtn.isSelected = true
+
         when(v.id){
             sign_out_btn.id -> signOut()
         }
