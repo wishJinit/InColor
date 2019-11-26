@@ -1,14 +1,12 @@
 package com.yujin.inphoto.view.fragment
 
-import android.app.AlertDialog
-import android.app.DatePickerDialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 import com.yujin.inphoto.R
@@ -16,16 +14,16 @@ import com.yujin.inphoto.SelectDateDialog
 import com.yujin.inphoto.Util.CalendarAdapter
 import kotlinx.android.synthetic.main.fragment_diary.*
 import java.util.*
-import android.app.Dialog
-import android.view.Window
-import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
 class DiaryFragment : Fragment() {
+    private val _calendarList = MutableLiveData<Array<Int>>()
+    val calendarList: LiveData<Array<Int>>
+        get() = _calendarList
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var year = 2019
+    private var month = 11
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +36,12 @@ class DiaryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val calendar = GregorianCalendar()
-        val calendarList = getCalendarList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH))
-        val calendarAdapter = CalendarAdapter(calendarList)
+        _calendarList.value = getCalendarList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH))
+        val calendarAdapter = CalendarAdapter(calendarList.value ?: Array(0){ 0 })
+
+        _calendarList.observe(this, androidx.lifecycle.Observer { array ->
+            calendarAdapter.setCalendarList(array)
+        })
 
         calendar_recycler_view.run{
             adapter = calendarAdapter
@@ -61,7 +63,10 @@ class DiaryFragment : Fragment() {
         }
     }
 
-    private fun getCalendarList(year: Int, month: Int): Array<Int>{
+    private fun getCalendarList(_year: Int, _month: Int): Array<Int>{
+        year = _year
+        month = _month
+
         val cal = GregorianCalendar(year, month, 1)
 
         val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK) - 1

@@ -1,38 +1,56 @@
 package com.yujin.inphoto.Util
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.yujin.inphoto.R
 import kotlinx.android.synthetic.main.calendar_day_cell.view.*
 
-class CalendarAdapter(calendarList: Array<Int>) : RecyclerView.Adapter<CalendarAdapter.CalendarHolder>() {
-    private val _calendarList = MutableLiveData<Array<Int>>().apply {
-        value = calendarList
-    }
-    val calendarList: LiveData<Array<Int>>
-        get() = _calendarList
+class CalendarAdapter(_calendarList: Array<Int>) : RecyclerView.Adapter<CalendarAdapter.CalendarHolder>() {
+    private var calendarList = _calendarList
+
+    private val week = 7
+    private val sunday = 0
+    private val saturday = 6
+
+    private val sundayColor = "#FE4D4D"
+    private val saturdayColor = "#2277AA"
+    private val normalColor = "#000000"
 
     override fun getItemCount(): Int {
-        return calendarList.value?.size ?: 0
+        return calendarList.size
     }
 
     override fun onBindViewHolder(holder: CalendarHolder, position: Int) {
-        holder.bind(calendarList.value!![position])
+        val color = Color.parseColor(getColorOfWeekName(position))
+        holder.bind(calendarList[position], color)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.calendar_day_cell, parent, false)
         return CalendarHolder(view)
     }
-    
+
+    fun setCalendarList(_calendarList: Array<Int>){
+        calendarList = _calendarList
+        notifyDataSetChanged()
+    }
+
+    private fun getColorOfWeekName(position: Int) = when (position % week) {
+        sunday -> sundayColor
+        saturday -> saturdayColor
+        else -> normalColor
+    }
+
     inner class CalendarHolder(val view : View) : RecyclerView.ViewHolder(view) {
-        fun bind(day: Int){
+        fun bind(day: Int, color: Int){
             if (day != 0){
                 view.day.text = day.toString()
+                view.day.setTextColor(color)
+            } else {
+                view.day.text = ""
             }
         }
     }
