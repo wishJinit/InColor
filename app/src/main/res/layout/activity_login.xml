@@ -122,6 +122,7 @@
                 android:id="@+id/login_button"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:layout_margin="20dp"
                 android:text="@string/sign_in"
                 style="@style/CustomButton" />
         </RelativeLayout>

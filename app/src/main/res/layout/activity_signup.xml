@@ -152,6 +152,7 @@
                 android:id="@+id/sign_up_button"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:layout_margin="20dp"
                 android:text="@string/sign_up"
                 style="@style/CustomButton" />
         </RelativeLayout>

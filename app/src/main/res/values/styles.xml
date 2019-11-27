@@ -13,7 +13,7 @@
 
     <style name="CustomEditText" parent="@android:style/Widget.EditText">
         <item name="android:background">@drawable/single_line_edittext</item>
-        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
     </style>
 
     <style name="EmailEditText" parent="@android:style/Widget.EditText">
@@ -37,7 +37,6 @@
     <style name="CustomButton" parent="@android:style/Widget.Button">
         <item name="android:textSize">17dp</item>
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:layout_margin">20dp</item>
         <item name="android:background">@drawable/confirm_button</item>
     </style>
 
