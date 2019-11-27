@@ -55,8 +55,11 @@ class DiaryFragment : Fragment() {
     private fun setEventListener() {
         select_date_text_view.setOnClickListener {
             context?.let { context ->
-                val dialog = SelectDateDialog(context) { year, month ->
-                    val calendarList = getCalendarList(year, month)
+                val dialog = SelectDateDialog(context, year, month) { _year, _month ->
+                    year = _year
+                    month = _month
+                    select_date_text_view.text = "${year}년 ${month}월"
+                    _calendarList.value = getCalendarList(year, month - 1)
                 }
                 dialog.show()
             }
