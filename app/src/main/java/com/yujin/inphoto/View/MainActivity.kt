@@ -9,6 +9,7 @@ import com.yujin.inphoto.R
 import com.yujin.inphoto.ViewModel.MemberViewModel
 import com.yujin.inphoto.databinding.ActivityMainBinding
 import com.yujin.inphoto.view.fragment.DiaryFragment
+import com.yujin.inphoto.view.fragment.WriteFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<ActivityMainBinding, MemberViewModel>() {
@@ -45,6 +46,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MemberViewModel>() {
         selectedMenuBtn.isSelected = true
 
         when(v.id){
+            write_btn.id -> changeContentView(WriteFragment(viewModel))
             sign_out_btn.id -> signOut()
         }
     }

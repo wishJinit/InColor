@@ -55,4 +55,13 @@
         <item name="android:textSize">12dp</item>
         <item name="android:background">#F3EFCA</item>
     </style>
+
+    <style name="WriteActivityTextView" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textSize">13dp</item>
+    </style>
 </resources>
