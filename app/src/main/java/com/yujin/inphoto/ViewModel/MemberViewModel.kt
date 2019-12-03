@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.yujin.inphoto.Base.BaseViewModel
 import com.yujin.inphoto.Model.Service.FirebaseService
 import com.yujin.inphoto.Model.VO.UserVO
-import com.yujin.inphoto.Util.SaveSharedPreference
+import com.yujin.inphoto.util.SaveSharedPreference
 
 
 class MemberViewModel : BaseViewModel(){

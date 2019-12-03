@@ -6,8 +6,8 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.yujin.inphoto.Base.BaseActivity
 import com.yujin.inphoto.R
-import com.yujin.inphoto.Util.ConfirmUtil
-import com.yujin.inphoto.Util.DLog
+import com.yujin.inphoto.util.ConfirmUtil
+import com.yujin.inphoto.util.DLog
 import com.yujin.inphoto.ViewModel.MemberViewModel
 import com.yujin.inphoto.databinding.ActivityLoginBinding
 import kotlinx.android.synthetic.main.activity_login.*

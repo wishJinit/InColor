@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 import com.yujin.inphoto.R
 import com.yujin.inphoto.view.dialog.SelectDateDialog
-import com.yujin.inphoto.Util.CalendarAdapter
+import com.yujin.inphoto.util.CalendarAdapter
 import kotlinx.android.synthetic.main.fragment_diary.*
 import java.util.*
 
