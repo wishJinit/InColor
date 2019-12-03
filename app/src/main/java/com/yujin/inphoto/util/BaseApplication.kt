@@ -1,4 +1,4 @@
-package com.yujin.inphoto.Util
+package com.yujin.inphoto.util
 
 import android.app.Application
 import android.content.Context
