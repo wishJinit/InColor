@@ -1,218 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingHorizontal="15dp"
-    android:paddingVertical="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.WriteFragment">
 
-    <TextView
-        android:id="@+id/date_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="25dp"
-        android:text="2019년 12월 1일 일기"
-        android:textSize="25dp" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp">
-
-        <TextView
-            android:id="@+id/weather_text_view"
-            style="@style/WriteActivityTextView"
-            android:text="@string/weather" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@id/weather_text_view">
-
-            <ImageView
-                android:id="@+id/sun_image_view"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:src="@drawable/sun_btn" />
-
-            <ImageView
-                android:id="@+id/cloud_image_view"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:src="@drawable/cloud_btn" />
-
-
-            <ImageView
-                android:id="@+id/rain_image_view"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:src="@drawable/rain_btn" />
-
-
-            <ImageView
-                android:id="@+id/wind_image_view"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:src="@drawable/wind_btn" />
-
-
-            <ImageView
-                android:id="@+id/snow_image_view"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:src="@drawable/snow_btn" />
-
-
-            <ImageView
-                android:id="@+id/light_image_view"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:src="@drawable/lighting_btn" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp">
-
-        <TextView
-            android:id="@+id/mood_text_view"
-            style="@style/WriteActivityTextView"
-            android:text="@string/mood" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_toRightOf="@id/mood_text_view">
-
-            <ImageView
-                android:id="@+id/bad_image_view"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/bad" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/mood_list_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/good_image_view"
-                android:layout_toRightOf="@id/bad_image_view">
-
-                <View
-                    android:id="@+id/mood_1_view"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/mood_view_normal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/mood_2_view"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:id="@+id/mood_2_view"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/mood_view_normal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/mood_3_view"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintStart_toEndOf="@id/mood_1_view"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:id="@+id/mood_3_view"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/mood_view_normal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/mood_4_view"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintStart_toEndOf="@id/mood_2_view"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:id="@+id/mood_4_view"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/mood_view_normal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/mood_5_view"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintStart_toEndOf="@id/mood_3_view"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:id="@+id/mood_5_view"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/mood_view_normal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintStart_toEndOf="@id/mood_4_view"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <ImageView
-                android:id="@+id/good_image_view"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/good" />
-
-        </RelativeLayout>
-    </RelativeLayout>
+    <data>
+        <variable
+            name="activity"
+            type="com.yujin.inphoto.view.fragment.WriteFragment" />
+        <variable
+            name="model"
+            type="com.yujin.inphoto.util.DiaryUtil"/>
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp">
 
         <TextView
-            style="@style/WriteActivityTextView"
-            android:text="@string/content" />
+            android:id="@+id/date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2019년 12월 1일 일기"
+            android:textSize="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="25dp"/>
 
-        <EditText
-            android:id="@+id/content_edit_text"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:background="@drawable/multiple_line_edittext"
-            android:gravity="top"
-            android:inputType="textMultiLine"
-            android:isScrollContainer="true"
-            android:scrollbars="vertical"
-            android:textSize="14dp" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp">
+            <TextView
+                android:id="@+id/weather_text_view"
+                style="@style/WriteActivityTextView"
+                android:text="@string/weather"/>
 
-    <Button
-        android:id="@+id/add_diary_btn"
-        style="@style/CustomButton"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginVertical="20dp"
-        android:text="@string/write_diary" />
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/weather_text_view"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:id="@+id/sun_image_view"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/sun_btn"
+                    android:onClick="@{(v)-> activity.selectWeather(v, model.weatherSun)}"/>
+
+                <ImageView
+                    android:id="@+id/cloud_image_view"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/cloud_btn"
+                    android:onClick="@{(v)-> activity.selectWeather(v, model.weatherCloud)}" />
+
+
+                <ImageView
+                    android:id="@+id/rain_image_view"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/rain_btn"
+                    android:onClick="@{(v)-> activity.selectWeather(v, model.weatherRain)}" />
+
+
+                <ImageView
+                    android:id="@+id/wind_image_view"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/wind_btn"
+                    android:onClick="@{(v)-> activity.selectWeather(v, model.weatherWind)}" />
+
+
+                <ImageView
+                    android:id="@+id/snow_image_view"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/snow_btn"
+                    android:onClick="@{(v)-> activity.selectWeather(v, model.weatherSnow)}" />
+
+
+                <ImageView
+                    android:id="@+id/light_image_view"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/lighting_btn"
+                    android:onClick="@{(v)-> activity.selectWeather(v, model.weatherLight)}" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp">
+            <TextView
+                android:id="@+id/mood_text_view"
+                style="@style/WriteActivityTextView"
+                android:text="@string/mood"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_toRightOf="@id/mood_text_view" >
+
+                <ImageView
+                    android:id="@+id/bad_image_view"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/bad"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mood_list_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/bad_image_view"
+                    android:layout_toLeftOf="@id/good_image_view"
+                    >
+
+                    <View
+                        android:id="@+id/mood_1_view"
+                        style="@style/MoodColorView"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/mood_2_view"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        android:onClick="@{(v)-> activity.selectMoodColor(v, model.moodColorRed1)}"/>
+                    <View
+                        android:id="@+id/mood_2_view"
+                        style="@style/MoodColorView"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/mood_1_view"
+                        app:layout_constraintEnd_toStartOf="@id/mood_3_view"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        android:onClick="@{(v)-> activity.selectMoodColor(v, model.moodColorRed2)}"/>
+                    <View
+                        android:id="@+id/mood_3_view"
+                        style="@style/MoodColorView"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/mood_2_view"
+                        app:layout_constraintEnd_toStartOf="@id/mood_4_view"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        android:onClick="@{(v)-> activity.selectMoodColor(v, model.moodColorRed3)}"/>
+                    <View
+                        android:id="@+id/mood_4_view"
+                        style="@style/MoodColorView"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/mood_3_view"
+                        app:layout_constraintEnd_toStartOf="@id/mood_5_view"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        android:onClick="@{(v)-> activity.selectMoodColor(v, model.moodColorRed4)}"/>
+                    <View
+                        android:id="@+id/mood_5_view"
+                        style="@style/MoodColorView"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/mood_4_view"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        android:onClick="@{(v)-> activity.selectMoodColor(v, model.moodColorRed5)}"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/good_image_view"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/good"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:orientation="vertical">
+            <TextView
+                style="@style/WriteActivityTextView"
+                android:text="@string/content"/>
+            <EditText
+                android:id="@+id/content_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:gravity="top"
+                android:textSize="14dp"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:isScrollContainer="true"
+                android:background="@drawable/multiple_line_edittext"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/add_diary_btn"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginVertical="20dp"
+            android:text="@string/write_diary"
+            style="@style/CustomButton"/>
+
+    </LinearLayout>
+</layout>
