@@ -64,4 +64,11 @@
         <item name="android:layout_marginBottom">10dp</item>
         <item name="android:textSize">13dp</item>
     </style>
+
+    <style name="MoodColorView">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/mood_view_normal</item>
+    </style>
 </resources>

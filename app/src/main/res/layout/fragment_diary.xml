@@ -28,7 +28,8 @@
                     android:layout_marginRight="7dp"
                     android:text="2019년 11월"
                     android:textColor="@color/colorBlack"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    android:visibility="invisible"/>
 
                 <ImageView
                     android:layout_width="10dp"
@@ -96,4 +97,10 @@
             android:scrollbarFadeDuration="0"
             android:scrollbarSize="5dp" />
     </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center" />
 </FrameLayout>

@@ -46,6 +46,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MemberViewModel>() {
         selectedMenuBtn.isSelected = true
 
         when(v.id){
+            diary_btn.id -> changeContentView(DiaryFragment(viewModel))
             write_btn.id -> changeContentView(WriteFragment(viewModel))
             sign_out_btn.id -> signOut()
         }
