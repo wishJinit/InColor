@@ -58,7 +58,6 @@ class DiaryFragment : Fragment() {
                 val dialog = SelectDateDialog(context, year, month) { _year, _month ->
                     year = _year
                     month = _month
-                    select_date_text_view.text = "${year}년 ${month}월"
                     _calendarList.value = getCalendarList(year, month - 1)
                 }
                 dialog.show()
@@ -69,6 +68,8 @@ class DiaryFragment : Fragment() {
     private fun getCalendarList(_year: Int, _month: Int): Array<Int>{
         year = _year
         month = _month
+        select_date_text_view.text = "${year}년 ${month+1}월"
+        select_date_text_view.visibility = View.VISIBLE
 
         val cal = GregorianCalendar(year, month, 1)
 

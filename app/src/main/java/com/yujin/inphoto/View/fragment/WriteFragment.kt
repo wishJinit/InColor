@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.yujin.inphoto.Model.VO.DiaryVO
 
 import com.yujin.inphoto.R
 import com.yujin.inphoto.util.ColorUtil
@@ -56,6 +57,11 @@ class WriteFragment(private val viewModel: MemberViewModel) : Fragment() {
 
     private fun setEventListener() {
         add_diary_btn.setOnClickListener {
+            val date = Date()
+            val content = content_edit_text.text.toString()
+
+            val diary = DiaryVO(date, weatherNum, moodNum, content)
+            viewModel.addDiary(diary)
         }
     }
 

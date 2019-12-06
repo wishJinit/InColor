@@ -1,9 +1,14 @@
 package com.yujin.inphoto.Model.Service
 
 import com.google.firebase.auth.*
+import com.google.firebase.firestore.FirebaseFirestore
+import com.yujin.inphoto.Model.VO.DiaryVO
+import com.yujin.inphoto.util.DLog
+import java.util.*
 
 class FirebaseService {
-    private var auth:FirebaseAuth = FirebaseAuth.getInstance()
+    private val auth:FirebaseAuth = FirebaseAuth.getInstance()
+    private val db = FirebaseFirestore.getInstance()
 
     // 회원가입
     fun createUser(name:String, email: String, pw: String, success:()->Unit, fail:() -> Unit, finally:() -> Unit) {
@@ -69,6 +74,23 @@ class FirebaseService {
 
     fun signOut(){
         auth.signOut()
+    }
+
+    fun addDiary(diaryVO: DiaryVO){
+        val diary = hashMapOf(
+            "date" to diaryVO.date,
+            "weather" to diaryVO.weather,
+            "mood_color" to diaryVO.moodColor,
+            "content" to diaryVO.content
+        )
+
+        getCurrentUser()?.let {
+            db.collection(it.uid)
+                .add(diary)
+                .addOnSuccessListener {
+                    DLog.d("success")
+                }
+        }
     }
 
     // 이름설정

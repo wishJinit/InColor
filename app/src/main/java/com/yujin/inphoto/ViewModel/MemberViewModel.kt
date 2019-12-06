@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yujin.inphoto.Base.BaseViewModel
 import com.yujin.inphoto.Model.Service.FirebaseService
+import com.yujin.inphoto.Model.VO.DiaryVO
 import com.yujin.inphoto.Model.VO.UserVO
 import com.yujin.inphoto.util.SaveSharedPreference
+import java.util.*
 
 
 class MemberViewModel : BaseViewModel(){
@@ -66,6 +68,10 @@ class MemberViewModel : BaseViewModel(){
         if (!isAutoSignIn(context)) {
             signOut(context)
         }
+    }
+
+    fun addDiary(diaryVO: DiaryVO) {
+        firebaseService.addDiary(diaryVO)
     }
 
 }

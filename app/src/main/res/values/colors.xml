@@ -10,4 +10,10 @@
     <color name="colorWhite">#FFF</color>
     <color name="colorBlue">#2277AA</color>
     <color name="colorRed">#FE4D4D</color>
+
+    <color name="moodColorRed1">#FFD4D4</color>
+    <color name="moodColorRed2">#FFABAB</color>
+    <color name="moodColorRed3">#FF9090</color>
+    <color name="moodColorRed4">#FF7676</color>
+    <color name="moodColorRed5">#FF5555</color>
 </resources>

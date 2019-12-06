@@ -26,7 +26,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MemberViewModel>() {
 
     override fun initSetting() {
         viewModel = ViewModelProviders.of(this)[MemberViewModel::class.java]
-        changeContentView(DiaryFragment())
+        changeContentView(DiaryFragment(viewModel))
 
         selectedMenuBtn = diary_btn
         selectedMenuBtn.isSelected = true
