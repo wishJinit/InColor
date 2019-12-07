@@ -2,6 +2,7 @@ package com.yujin.inphoto.Model.Service
 
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import com.yujin.inphoto.Model.VO.DiaryVO
 import com.yujin.inphoto.util.DLog
 import java.util.*
@@ -89,6 +90,22 @@ class FirebaseService {
                 .add(diary)
                 .addOnSuccessListener {
                     DLog.d("success")
+                }
+        }
+    }
+
+    fun getMonthDiary(startDate:Date, lastDate:Date, success: (document: QuerySnapshot)->Unit, fail: ()->Unit){
+        getCurrentUser()?.let {
+            db.collection(it.uid)
+                .whereGreaterThan("date", startDate)
+                .whereLessThan("date", lastDate)
+                .orderBy("date")
+                .get()
+                .addOnSuccessListener { result ->
+                    success(result)
+                }
+                .addOnFailureListener {
+                    fail()
                 }
         }
     }
