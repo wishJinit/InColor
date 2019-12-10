@@ -1,5 +1,6 @@
 package com.yujin.inphoto.Model.Service
 
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
@@ -12,30 +13,13 @@ class FirebaseService {
     private val db = FirebaseFirestore.getInstance()
 
     // 회원가입
-    fun createUser(name:String, email: String, pw: String, success:()->Unit, fail:() -> Unit, finally:() -> Unit) {
-        auth.createUserWithEmailAndPassword(email, pw)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    setName(name)
-                    success()
-                } else {
-                    fail()
-                }
-                finally()
-            }
+    fun createUser(name:String, email: String, pw: String): Task<AuthResult> {
+        return auth.createUserWithEmailAndPassword(email, pw)
     }
 
     // 로그인
-    fun signIn(email:String, pw:String, success:()->Unit, fail:() -> Unit, finally:() -> Unit) {
-        auth.signInWithEmailAndPassword(email, pw)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    success()
-                } else {
-                    fail()
-                }
-                finally()
-            }
+    fun signIn(email:String, pw:String): Task<AuthResult> {
+        return auth.signInWithEmailAndPassword(email, pw)
     }
 
     // 현재 로그인된 사용자
@@ -44,33 +28,13 @@ class FirebaseService {
     }
 
     // 이메일 중복 체크
-    fun checkEmail(email: String, notExisting:()->Unit, alreadyExisting:()->Unit, fail:()->Unit, finally:()->Unit){
-        auth.fetchSignInMethodsForEmail(email)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    if(it.result?.signInMethods?.contains(EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD) == true){
-                        alreadyExisting()
-                    } else {
-                        notExisting()
-                    }
-                } else {
-                    fail()
-                }
-                finally()
-            }
+    fun checkEmail(email: String): Task<SignInMethodQueryResult> {
+        return auth.fetchSignInMethodsForEmail(email)
     }
 
     // 이메일 비밀번호 리셋
-    fun sendPasswordResetEmail(email: String, success:()->Unit, fail:()->Unit, finally:()->Unit){
-        auth.sendPasswordResetEmail(email)
-            .addOnCompleteListener {
-                if (it.isSuccessful){
-                    success()
-                } else {
-                    fail()
-                }
-                finally()
-            }
+    fun sendPasswordResetEmail(email: String): Task<Void> {
+        return auth.sendPasswordResetEmail(email)
     }
 
     fun signOut(){
@@ -94,24 +58,18 @@ class FirebaseService {
         }
     }
 
-    fun getMonthDiary(startDate:Date, lastDate:Date, success: (document: QuerySnapshot)->Unit, fail: ()->Unit){
+    fun getMonthDiary(startDate:Date, lastDate:Date): Task<QuerySnapshot>? {
         getCurrentUser()?.let {
-            db.collection(it.uid)
+            return db.collection(it.uid)
                 .whereGreaterThan("date", startDate)
                 .whereLessThan("date", lastDate)
                 .orderBy("date")
                 .get()
-                .addOnSuccessListener { result ->
-                    success(result)
-                }
-                .addOnFailureListener {
-                    fail()
-                }
         }
+        return null
     }
 
-    // 이름설정
-    private fun setName(name:String){
+    fun setName(name:String){
         val user = auth.currentUser
         val profileUpdate = UserProfileChangeRequest.Builder()
             .setDisplayName(name)

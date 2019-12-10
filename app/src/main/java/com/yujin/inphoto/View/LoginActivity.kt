@@ -3,6 +3,7 @@ package com.yujin.inphoto.view
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.yujin.inphoto.Base.BaseActivity
 import com.yujin.inphoto.R
@@ -25,7 +26,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
         }
     }
 
-    override fun setDataBinding() {}
+    override fun setDataBinding() {
+        viewModel.userVO.observe(this, Observer {  user ->
+            hideProgressBar()
+            enableLoginButton()
+
+            user?.let {
+                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                successSignIn()
+            } ?: run {
+                Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 
     override fun afterDataBinding() {
         setEventListener()
@@ -42,7 +55,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
             } else if(!ConfirmUtil.isEmailValid(id)){
                 Toast.makeText(this, "올바른 이메일 형식이 아닙니다.", Toast.LENGTH_SHORT).show()
             } else {
-                checkLogin(it)
+                checkLogin()
             }
         }
 
@@ -64,43 +77,32 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
     }
 
     // 로그인
-    private fun checkLogin(btn:View){
+    private fun checkLogin(){
         showProgressBar()
-        disableButton(btn)
+        disableLoginButton()
 
         val id = id_edit_text.text.toString()
         val pw = pw_edit_text.text.toString()
-        viewModel.singIn(id, pw,
-            {
-                if (auto_sign_in_check_box.isChecked) {
-                    DLog.d("AutoLogin")
-                    viewModel.setAutoSignIn(this)
-                }
-
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                successSignIn()
-            },
-            {
-                Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
-            },
-            {
-                hideProgressBar()
-                enableButton(btn)
-            })
+        viewModel.singIn(id, pw)
     }
 
     private fun successSignIn(){
+        if (auto_sign_in_check_box.isChecked) {
+            DLog.d("AutoLogin")
+            viewModel.setAutoSignIn(this)
+        }
+
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
 
-    private fun enableButton(btn:View){
-        btn.isEnabled = true
+    private fun enableLoginButton(){
+        login_button.isEnabled = true
     }
 
-    private fun disableButton(btn:View){
-        btn.isEnabled = false
+    private fun disableLoginButton(){
+        login_button.isEnabled = false
     }
 
     private fun showProgressBar(){

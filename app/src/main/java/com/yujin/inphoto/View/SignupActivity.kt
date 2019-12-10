@@ -2,6 +2,7 @@ package com.yujin.inphoto.view
 
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.yujin.inphoto.Base.BaseActivity
 import com.yujin.inphoto.R
@@ -19,9 +20,33 @@ class SignupActivity : BaseActivity<ActivitySignupBinding, MemberViewModel>() {
 
     override fun initSetting() {
         viewModel = ViewModelProviders.of(this)[MemberViewModel::class.java]
+        viewModel.resetResult()
     }
 
-    override fun setDataBinding() { }
+    override fun setDataBinding() { 
+        viewModel.signUpResult.observe(this, Observer { result ->
+            enableSignUpButton()
+            hideProgressBar()
+
+            if (result == 1) {
+                Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                finish()
+            } else if (result == 0) {
+                Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
+            }
+        })
+        viewModel.checkEmailResult.observe(this, Observer { result ->
+            hideProgressBar()
+            enableCheckEmailButton()
+            if (result == 1) {
+                check_email_result_text_view.setText(R.string.notify_unable_sign_up)
+                isCheckEmail = false
+            } else if (result == 0) {
+                check_email_result_text_view.setText(R.string.notify_able_sign_up)
+                isCheckEmail = true
+            }
+        })
+    }
 
     override fun afterDataBinding() {
         setEventListener()
@@ -43,7 +68,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding, MemberViewModel>() {
             } else if (!isCheckEmail){
                 Toast.makeText(this, "이메일 중복확인을 해주세요.", Toast.LENGTH_SHORT).show()
             } else {
-                createUser(it)
+                createUser()
             }
         }
 
@@ -58,24 +83,9 @@ class SignupActivity : BaseActivity<ActivitySignupBinding, MemberViewModel>() {
                 resultTextView.setText(R.string.notify_check_email)
             } else {
                 showProgressBar()
-                disableButton(it)
-                viewModel.checkEmail(id,
-                    {
-                        resultTextView.setText(R.string.notify_able_sign_up)
-                        isCheckEmail = true
-                    },
-                    {
-                        resultTextView.setText(R.string.notify_unable_sign_up)
-                        isCheckEmail = false
-                    },
-                    {
-                        resultTextView.setText(R.string.notify_check_fail)
-                        isCheckEmail = false
-                    },
-                    {
-                        hideProgressBar()
-                        enableButton(it)
-                    })
+                disableCheckEmailButton()
+
+                viewModel.checkEmail(id)
             }
         }
 
@@ -86,34 +96,31 @@ class SignupActivity : BaseActivity<ActivitySignupBinding, MemberViewModel>() {
 
     private fun checkPassword() = pw_edit_text.text.toString() == check_pw_edit_text.text.toString()
 
-    private fun createUser(btn:View){
+    private fun createUser(){
         showProgressBar()
-        disableButton(btn)
+        disableSignUpButton()
 
         val name = name_edit_text.text.toString()
         val id = id_edit_text.text.toString()
         val pw = pw_edit_text.text.toString()
 
-        viewModel.signUp(name, id, pw,
-            {
-                Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                finish()
-            },
-            {
-                Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
-            },
-            {
-                hideProgressBar()
-                enableButton(btn)
-            })
+        viewModel.signUp(name, id, pw)
     }
 
-    private fun enableButton(btn:View){
-        btn.isEnabled = true
+    private fun enableCheckEmailButton(){
+        check_email_btn.isEnabled = true
     }
 
-    private fun disableButton(btn:View){
-        btn.isEnabled = false
+    private fun disableCheckEmailButton(){
+        check_email_btn.isEnabled = false
+    }
+
+    private fun enableSignUpButton(){
+        sign_up_button.isEnabled = true
+    }
+
+    private fun disableSignUpButton(){
+        sign_up_button.isEnabled = false
     }
 
     private fun showProgressBar(){

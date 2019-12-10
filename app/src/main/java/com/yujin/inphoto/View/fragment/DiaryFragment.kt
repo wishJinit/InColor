@@ -54,6 +54,25 @@ class DiaryFragment(private val viewModel: MemberViewModel) : Fragment() {
             calendarAdapter?.setCalendarList(array, diaryList)
         })
 
+        viewModel.diaryDocuments.observe(this, androidx.lifecycle.Observer { documents ->
+            var diaryList = HashMap<Int, DiaryVO>()
+
+            for (diary in documents) {
+                val date = diary.getDate("date")!!
+                val weather = diary.getLong("weather")!!.toInt()
+                val moodColor = diary.getLong("mood_color")!!.toInt()
+                val content = diary.getString("content")!!
+
+                val calendar = Calendar.getInstance()
+                calendar.time = date
+
+                diaryList[calendar.get(Calendar.DATE)] = DiaryVO(date, weather, moodColor, content)
+            }
+
+            setCalendarView(diaryList)
+            hideProgressbar()
+        })
+
         calendar_recycler_view.run{
             adapter = calendarAdapter
             layoutManager = StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL)
@@ -62,28 +81,7 @@ class DiaryFragment(private val viewModel: MemberViewModel) : Fragment() {
 
     private fun setDiary() {
         showProgressbar()
-        viewModel.getMonthDiary(year, month - 1,
-            {
-                var diaryList = HashMap<Int, DiaryVO>()
-
-                for (diary in it) {
-                    val date = diary.getDate("date")!!
-                    val weather = diary.getLong("weather")!!.toInt()
-                    val moodColor = diary.getLong("mood_color")!!.toInt()
-                    val content = diary.getString("content")!!
-
-                    val calendar = Calendar.getInstance()
-                    calendar.time = date
-
-                    diaryList[calendar.get(Calendar.DATE)] = DiaryVO(date, weather, moodColor, content)
-                }
-
-                setCalendarView(diaryList)
-                hideProgressbar()
-            },
-            {
-                Toast.makeText(context, "다이어리 목록을 불러오지 못하였습니다.", Toast.LENGTH_SHORT).show()
-            })
+        viewModel.getMonthDiary(year, month - 1)
     }
 
     private fun setEventListener() {

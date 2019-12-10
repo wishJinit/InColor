@@ -2,6 +2,7 @@ package com.yujin.inphoto.view
 
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.yujin.inphoto.Base.BaseActivity
 import com.yujin.inphoto.R
@@ -19,7 +20,27 @@ class FindPasswordActivity : BaseActivity<ActivityFindPasswordBinding, MemberVie
         viewModel = ViewModelProviders.of(this)[MemberViewModel::class.java]
     }
 
-    override fun setDataBinding() { }
+    override fun setDataBinding() {
+        viewModel.sendEmailResult.observe(this, Observer { result ->
+            hideProgressBar()
+            enableSendMailButton()
+            if(result == 1){
+                Toast.makeText(this, "메일전송 성공", Toast.LENGTH_SHORT).show()
+                finish()
+            } else if (result == 0) {
+                Toast.makeText(this, "메일전송 실패", Toast.LENGTH_SHORT).show()
+            }
+        })
+        viewModel.checkEmailResult.observe(this, Observer { result ->
+            hideProgressBar()
+            enableSendMailButton()
+            if (result == 1) {
+                viewModel.sendPasswordResetEmail(id_edit_text.text.toString())
+            } else if (result == 0) {
+                Toast.makeText(this, "등록된 회원이 아니거나 메일 전송 실패하였습니다.", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 
     override fun afterDataBinding() {
         setEventListener()
@@ -35,36 +56,8 @@ class FindPasswordActivity : BaseActivity<ActivityFindPasswordBinding, MemberVie
                 Toast.makeText(this, getString(R.string.notify_check_email), Toast.LENGTH_SHORT).show()
             } else {
                 showProgressBar()
-                disableButton(it)
-
-                val sendMail = {
-                    viewModel.sendPasswordResetEmail(
-                        id_edit_text.text.toString(),
-                        {
-                            Toast.makeText(this, "메일전송 성공", Toast.LENGTH_SHORT).show()
-                            finish()
-                        },
-                        {
-                            Toast.makeText(this, "메일전송 실패", Toast.LENGTH_SHORT).show()
-                        },
-                        {
-                            hideProgressBar()
-                            enableButton(it)
-                        })
-                }
-
-                viewModel.checkEmail(id_edit_text.text.toString(),
-                    {
-                        Toast.makeText(this, "등록된 회원이 아닙니다.", Toast.LENGTH_SHORT).show()
-                    },
-                    sendMail,
-                    {
-                        Toast.makeText(this, "메일전송 실패", Toast.LENGTH_SHORT).show()
-                    },
-                    {
-                        hideProgressBar()
-                        enableButton(it)
-                    })
+                disableSendMailButton()
+                viewModel.checkEmail(id_edit_text.text.toString())
             }
         }
 
@@ -73,12 +66,12 @@ class FindPasswordActivity : BaseActivity<ActivityFindPasswordBinding, MemberVie
         }
     }
 
-    private fun enableButton(btn:View){
-        btn.isEnabled = true
+    private fun enableSendMailButton(){
+        send_mail_btn.isEnabled = true
     }
 
-    private fun disableButton(btn:View){
-        btn.isEnabled = false
+    private fun disableSendMailButton(){
+        send_mail_btn.isEnabled = false
     }
 
     private fun showProgressBar(){
