@@ -5,9 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.yujin.inphoto.Model.VO.DiaryVO
 
@@ -21,10 +18,8 @@ import kotlin.collections.HashMap
 
 
 class DiaryFragment(private val viewModel: MemberViewModel) : Fragment() {
-    private val _calendarList = MutableLiveData<Array<Int>>()
-    val calendarList: LiveData<Array<Int>>
-        get() = _calendarList
 
+    private lateinit var calendarAdapter: CalendarAdapter
     private var year = 2019
     private var month = 11
 
@@ -37,23 +32,12 @@ class DiaryFragment(private val viewModel: MemberViewModel) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setDatabinding()
         setDiary()
         setEventListener()
     }
-
-    private fun setCalendarView(diaryList: Map<Int, DiaryVO>){
-        val calendar = GregorianCalendar()
-
-        _calendarList.value = getCalendarList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH))
-        var calendarAdapter: CalendarAdapter? = null
-        context?.let { context ->
-            calendarAdapter = CalendarAdapter(context, calendarList.value ?: Array(0) { 0 }, diaryList)
-        }
-
-        _calendarList.observe(this, androidx.lifecycle.Observer { array ->
-            calendarAdapter?.setCalendarList(array, diaryList)
-        })
-
+    
+    private fun setDatabinding(){
         viewModel.diaryDocuments.observe(this, androidx.lifecycle.Observer { documents ->
             var diaryList = HashMap<Int, DiaryVO>()
 
@@ -69,19 +53,23 @@ class DiaryFragment(private val viewModel: MemberViewModel) : Fragment() {
                 diaryList[calendar.get(Calendar.DATE)] = DiaryVO(date, weather, moodColor, content)
             }
 
-            setCalendarView(diaryList)
+            val calendarList = getCalendarList(year, month)
+            calendarAdapter.setCalendar(calendarList, diaryList)
             hideProgressbar()
         })
-
-        calendar_recycler_view.run{
-            adapter = calendarAdapter
-            layoutManager = StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL)
-        }
     }
 
     private fun setDiary() {
         showProgressbar()
-        viewModel.getMonthDiary(year, month - 1)
+        context?.let { context ->
+            calendarAdapter = CalendarAdapter(context, arrayOf(), mapOf())
+
+            calendar_recycler_view.run{
+                adapter = calendarAdapter
+                layoutManager = StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL)
+            }
+        }
+        viewModel.getMonthDiary(year, month)
     }
 
     private fun setEventListener() {
@@ -90,7 +78,7 @@ class DiaryFragment(private val viewModel: MemberViewModel) : Fragment() {
                 val dialog = SelectDateDialog(context, year, month) { _year, _month ->
                     year = _year
                     month = _month
-                    _calendarList.value = getCalendarList(year, month - 1)
+                    viewModel.getMonthDiary(year, month)
                 }
                 dialog.show()
             }

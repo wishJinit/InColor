@@ -134,9 +134,9 @@ class MemberViewModel : BaseViewModel(){
 
     fun getMonthDiary(year:Int, month:Int){
         val calendar = Calendar.getInstance()
-        calendar.set(year, (month + 1), 1, 0, 0, 0)
+        calendar.set(year, month, 1, 0, 0, 0)
         val startDate = calendar.time
-        calendar.set(year, (month + 1), calendar.getActualMaximum(Calendar.DAY_OF_MONTH), 0, 0, 0)
+        calendar.set(year, month, calendar.getActualMaximum(Calendar.DAY_OF_MONTH), 0, 0, 0)
         val finishDate = calendar.time
 
         firebaseService.getMonthDiary(startDate, finishDate)

@@ -41,7 +41,7 @@ class CalendarAdapter(val context:Context, _calendarList: Array<Int>, _diaryList
         return CalendarHolder(view)
     }
 
-    fun setCalendarList(_calendarList: Array<Int>, _diaryList: Map<Int, DiaryVO>){
+    fun setCalendar(_calendarList: Array<Int>, _diaryList: Map<Int, DiaryVO>){
         calendarList = _calendarList
         diaryList = _diaryList
         notifyDataSetChanged()

@@ -50,7 +50,7 @@ class SelectDateDialog(context: Context, private val year: Int, private val mont
 
         select_btn.setOnClickListener {
             val year = year_number_picker.value
-            val month = month_number_picker.value
+            val month = month_number_picker.value - 1
 
             selectDate(year, month)
             dismiss()
