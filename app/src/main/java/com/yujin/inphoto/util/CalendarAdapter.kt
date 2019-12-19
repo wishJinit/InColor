@@ -63,13 +63,7 @@ class CalendarAdapter(val context:Context, _calendarList: Array<Int>, _diaryList
                     view.mood_color_layout.background = ColorUtil.getColorDrawable(context, moodColorNm)
                     view.setOnClickListener {
                         val intent = Intent(context, DiaryActivity::class.java)
-
-                        val bundle = Bundle()
-                        bundle.putInt("moodColor", diary.moodColor)
-                        bundle.putInt("weather", diary.weather)
-                        bundle.putString("content", diary.content)
-                        intent.putExtra("Diary", bundle)
-
+                        intent.putExtra("Diary", diary)
                         context.startActivity(intent)
                     }
                 }
