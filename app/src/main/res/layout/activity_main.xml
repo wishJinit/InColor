@@ -6,7 +6,7 @@
     <data>
         <variable
             name="activity"
-            type="com.yujin.inphoto.view.MainActivity" />
+            type="com.yujin.inColor.view.MainActivity" />
     </data>
 
     <RelativeLayout

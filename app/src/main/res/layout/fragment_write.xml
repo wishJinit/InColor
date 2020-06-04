@@ -7,10 +7,10 @@
     <data>
         <variable
             name="activity"
-            type="com.yujin.inphoto.view.fragment.WriteFragment" />
+            type="com.yujin.inColor.view.fragment.WriteFragment" />
         <variable
             name="model"
-            type="com.yujin.inphoto.util.DiaryUtil"/>
+            type="com.yujin.inColor.util.DiaryUtil"/>
     </data>
 
     <LinearLayout

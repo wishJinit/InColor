@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">InPhoto</string>
+    <string name="app_name">InColor</string>
 
     <string name="sign_up_italic"><u>회원가입</u></string>
     <string name="find_password_italic"><u>비밀번호찾기</u></string>
