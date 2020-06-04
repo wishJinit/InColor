@@ -28,6 +28,10 @@
     <string name="month">월</string>
 
     <!--menu string-->
+    <string name="menu_calendar">캘린더</string>
+    <string name="menu_list">리스트</string>
+
+    <!--menu string-->
     <string name="weather">날씨</string>
     <string name="mood">기분</string>
     <string name="content">일기</string>
