@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.yujin.inColor.Base.BaseActivity
 import com.yujin.inColor.R
 import com.yujin.inColor.util.ConfirmUtil
-import com.yujin.inColor.ViewModel.MemberViewModel
+import com.yujin.inColor.viewModel.MemberViewModel
 import com.yujin.inColor.databinding.ActivitySignupBinding
 import kotlinx.android.synthetic.main.activity_signup.*
 

@@ -11,7 +11,7 @@ import com.yujin.inColor.Model.VO.DiaryVO
 
 import com.yujin.inColor.R
 import com.yujin.inColor.util.ColorUtil
-import com.yujin.inColor.ViewModel.MemberViewModel
+import com.yujin.inColor.viewModel.MemberViewModel
 import com.yujin.inColor.databinding.FragmentWriteBinding
 import com.yujin.inColor.util.DiaryUtil
 import kotlinx.android.synthetic.main.fragment_write.*

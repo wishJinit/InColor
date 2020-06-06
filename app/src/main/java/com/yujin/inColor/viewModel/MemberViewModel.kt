@@ -1,4 +1,4 @@
-package com.yujin.inColor.ViewModel
+package com.yujin.inColor.viewModel
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -10,7 +10,6 @@ import com.yujin.inColor.Model.FirebaseService
 import com.yujin.inColor.Model.VO.DiaryVO
 import com.yujin.inColor.Model.VO.UserVO
 import com.yujin.inColor.Model.SaveSharedPreference
-import com.yujin.inColor.util.DLog
 import java.util.*
 
 
@@ -71,6 +70,8 @@ class MemberViewModel : BaseViewModel(){
                 val curName = currentUser.displayName ?: ""
                 val curEmail = currentUser.email ?: ""
                 _userVO.value = UserVO(curId, curName, curEmail)
+            }.addOnFailureListener {
+                // 처리필요
             }
     }
 

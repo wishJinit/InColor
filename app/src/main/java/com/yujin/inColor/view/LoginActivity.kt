@@ -9,7 +9,7 @@ import com.yujin.inColor.Base.BaseActivity
 import com.yujin.inColor.R
 import com.yujin.inColor.util.ConfirmUtil
 import com.yujin.inColor.util.DLog
-import com.yujin.inColor.ViewModel.MemberViewModel
+import com.yujin.inColor.viewModel.MemberViewModel
 import com.yujin.inColor.databinding.ActivityLoginBinding
 import kotlinx.android.synthetic.main.activity_login.*
 

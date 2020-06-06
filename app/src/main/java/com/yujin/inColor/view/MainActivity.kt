@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.yujin.inColor.Base.BaseActivity
 import com.yujin.inColor.R
-import com.yujin.inColor.ViewModel.MemberViewModel
+import com.yujin.inColor.viewModel.MemberViewModel
 import com.yujin.inColor.databinding.ActivityMainBinding
 import com.yujin.inColor.view.fragment.DiaryFragment
 import com.yujin.inColor.view.fragment.WriteFragment

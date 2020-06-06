@@ -11,7 +11,7 @@ import com.yujin.inColor.Model.VO.DiaryVO
 import com.yujin.inColor.R
 import com.yujin.inColor.view.dialog.SelectDateDialog
 import com.yujin.inColor.view.adapter.CalendarAdapter
-import com.yujin.inColor.ViewModel.MemberViewModel
+import com.yujin.inColor.viewModel.MemberViewModel
 import kotlinx.android.synthetic.main.fragment_diary.*
 import java.util.*
 import kotlin.collections.HashMap
