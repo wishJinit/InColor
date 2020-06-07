@@ -1,51 +1,44 @@
 package com.yujin.inColor.view.fragment
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.yujin.inColor.Base.BaseFragment
 import com.yujin.inColor.Model.VO.DiaryVO
 
 import com.yujin.inColor.R
 import com.yujin.inColor.view.dialog.SelectDateDialog
 import com.yujin.inColor.view.adapter.CalendarAdapter
 import com.yujin.inColor.viewModel.MemberViewModel
+import com.yujin.inColor.databinding.FragmentDiaryBinding
 import kotlinx.android.synthetic.main.fragment_diary.*
 import java.util.*
 import kotlin.collections.HashMap
 
 
-class DiaryFragment(private val viewModel: MemberViewModel) : Fragment() {
+class DiaryFragment(private val viewModel: MemberViewModel) : BaseFragment<FragmentDiaryBinding>() {
+    override val layoutId: Int
+        get() = R.layout.fragment_diary
 
     private lateinit var calendarAdapter: CalendarAdapter
     private var year = 2019
     private var month = 11
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_diary, container, false)
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setDatabinding()
+    override fun initSetting() {
+        setDataBinding()
         setDiary()
         setEventListener()
     }
     
-    private fun setDatabinding(){
+    private fun setDataBinding(){
         viewModel.diaryDocuments.observe(this, androidx.lifecycle.Observer { documents ->
-            var diaryList = HashMap<Int, DiaryVO>()
+            val diaryList = HashMap<Int, DiaryVO>()
 
             for (diary in documents) {
-                val date = diary.getDate("date")!!
-                val weather = diary.getLong("weather")!!.toInt()
-                val moodColor = diary.getLong("mood_color")!!.toInt()
-                val content = diary.getString("content")!!
+                val date = diary.getDate("date")
+                val weather = diary.getLong("weather")?.toInt()
+                val moodColor = diary.getLong("mood_color")?.toInt()
+                val content = diary.getString("content")
 
                 val calendar = Calendar.getInstance()
                 calendar.time = date
@@ -78,8 +71,8 @@ class DiaryFragment(private val viewModel: MemberViewModel) : Fragment() {
 
     private fun setEventListener() {
         select_date_text_view.setOnClickListener {
-            context?.let { context ->
-                val dialog = SelectDateDialog(context, year, month) { _year, _month ->
+            context?.let { c ->
+                val dialog = SelectDateDialog(c, year, month) { _year, _month ->
                     year = _year
                     month = _month
                     viewModel.getMonthDiary(year, month)

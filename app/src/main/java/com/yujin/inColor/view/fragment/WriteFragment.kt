@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.yujin.inColor.Base.BaseFragment
 import com.yujin.inColor.Model.VO.DiaryVO
 
 import com.yujin.inColor.R
@@ -18,8 +19,9 @@ import kotlinx.android.synthetic.main.fragment_write.*
 import java.util.*
 
 
-class WriteFragment(private val viewModel: MemberViewModel) : Fragment() {
-    private lateinit var viewDataBinding: FragmentWriteBinding
+class WriteFragment(private val viewModel: MemberViewModel) : BaseFragment<FragmentWriteBinding>() {
+    override val layoutId: Int
+        get() = R.layout.fragment_write
 
     private val year: Int
     private val month: Int
@@ -37,18 +39,7 @@ class WriteFragment(private val viewModel: MemberViewModel) : Fragment() {
         day = cal.get(Calendar.DATE)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        viewDataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_write, container, false)
-        viewDataBinding.activity = this
-        viewDataBinding.model = DiaryUtil
-        return viewDataBinding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initSetting() {
         date_text_view.text = "${year}년 ${month}월 ${day}일 일기"
 
         setEventListener()
