@@ -3,8 +3,6 @@ package com.yujin.inColor.view
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.yujin.inColor.Base.BaseActivity
 import com.yujin.inColor.R
 import com.yujin.inColor.util.ConfirmUtil
@@ -12,33 +10,21 @@ import com.yujin.inColor.util.DLog
 import com.yujin.inColor.viewModel.MemberViewModel
 import com.yujin.inColor.databinding.ActivityLoginBinding
 import kotlinx.android.synthetic.main.activity_login.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
-    override lateinit var viewModel: MemberViewModel
+    override val viewModel by viewModel<MemberViewModel>()
     override val layoutResourceId: Int
         get() = R.layout.activity_login
 
     override fun initSetting() {
-        viewModel = ViewModelProviders.of(this)[MemberViewModel::class.java]
         viewModel.autoSignIn(this) {
             successSignIn()
         }
     }
 
-    override fun setDataBinding() {
-        viewModel.userVO.observe(this, Observer {  user ->
-            hideProgressBar()
-            enableLoginButton()
-
-            user?.let {
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                successSignIn()
-            } ?: run {
-                Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
+    override fun setDataBinding() {}
 
     override fun afterDataBinding() {
         setEventListener()
@@ -55,17 +41,23 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
             } else if(!ConfirmUtil.isEmailValid(id)){
                 Toast.makeText(this, "올바른 이메일 형식이 아닙니다.", Toast.LENGTH_SHORT).show()
             } else {
-                checkLogin()
+                checkLogin({
+                    hideProgressBar()
+                    Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                    successSignIn()
+                }, {
+                    hideProgressBar()
+                    enableLoginButton()
+                    Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
+                })
             }
         }
 
-        // 회원가입 Activity 이동
         create_user_tv.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
 
-        // 비밀번호 찾기 Activity 이동
         find_password_tv.setOnClickListener {
             val intent = Intent(this, FindPasswordActivity::class.java)
             startActivity(intent)
@@ -77,13 +69,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, MemberViewModel>() {
     }
 
     // 로그인
-    private fun checkLogin(){
+    private fun checkLogin(success: () -> Unit, fail: () -> Unit){
         showProgressBar()
         disableLoginButton()
 
         val id = id_edit_text.text.toString()
         val pw = pw_edit_text.text.toString()
-        viewModel.singIn(id, pw)
+        viewModel.singIn(id, pw, success, fail)
     }
 
     private fun successSignIn(){

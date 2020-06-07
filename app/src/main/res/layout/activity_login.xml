@@ -68,13 +68,13 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true">
+                    android:layout_alignParentStart="true">
                     <TextView
                         android:id="@+id/create_user_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
-                        android:textSize="13dp"
+                        android:textSize="13sp"
                         android:text="@string/sign_up_italic"
                         />
                     <TextView
@@ -82,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
-                        android:textSize="13dp"
+                        android:textSize="13sp"
                         android:text="@string/find_password_italic"
                         />
                 </LinearLayout>
@@ -90,7 +90,7 @@
                     android:id="@+id/auto_sign_in_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true">
+                    android:layout_alignParentEnd="true">
                     <CheckBox
                         android:id="@+id/auto_sign_in_check_box"
                         android:layout_width="14dp"
@@ -103,10 +103,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="7dp"
-                        android:textSize="13dp"
+                        android:layout_marginStart="7dp"
+                        android:textSize="13sp"
                         android:text="@string/auto_sign_in"
-                        />/>
+                        />
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>

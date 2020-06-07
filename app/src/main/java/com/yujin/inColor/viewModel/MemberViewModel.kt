@@ -62,16 +62,17 @@ class MemberViewModel : BaseViewModel(){
             }
     }
 
-    fun singIn(email:String, pw:String){
-        firebaseService.signIn(email, pw)
+    fun singIn(id:String, pw:String, success: () -> Unit, fail: () -> Unit) {
+        firebaseService.signIn(id, pw)
             .addOnSuccessListener {
-                val currentUser = firebaseService.getCurrentUser()!!
-                val curId = currentUser.uid
-                val curName = currentUser.displayName ?: ""
-                val curEmail = currentUser.email ?: ""
-                _userVO.value = UserVO(curId, curName, curEmail)
+                firebaseService.getCurrentUser()?.run {
+                    val curName = displayName ?: ""
+                    val curEmail = email ?: ""
+                    _userVO.value = UserVO(uid, curName, curEmail)
+                }
+                success()
             }.addOnFailureListener {
-                // 처리필요
+                fail()
             }
     }
 
