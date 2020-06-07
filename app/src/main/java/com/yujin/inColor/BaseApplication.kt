@@ -4,6 +4,9 @@ import android.app.Application
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import com.yujin.inColor.di.moduleList
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class BaseApplication : Application(){
 
@@ -14,6 +17,11 @@ class BaseApplication : Application(){
     override fun onCreate() {
         super.onCreate()
         DEBUG = isDebuggable(this)
+
+        startKoin {
+            androidContext(applicationContext)
+            modules(moduleList)
+        }
     }
 
     private fun isDebuggable(context: Context) : Boolean{
