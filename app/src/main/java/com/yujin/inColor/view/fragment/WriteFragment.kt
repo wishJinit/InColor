@@ -38,8 +38,19 @@ class WriteFragment() : BaseFragment<FragmentWriteBinding>() {
     override fun initSetting() {
         date_text_view.text = "${year}년 ${month}월 ${day}일 일기"
 
+        setDataBinding()
         setEventListener()
         setMoodColor()
+    }
+
+    private fun setDataBinding() {
+        binding.let {
+            it.lifecycleOwner = this
+            it.activity = this
+            it.viewModel = viewModel.apply {
+                getDateDiary()
+            }
+        }
     }
 
     private fun setEventListener() {
@@ -47,8 +58,12 @@ class WriteFragment() : BaseFragment<FragmentWriteBinding>() {
             val date = Date()
             val content = content_edit_text.text.toString()
 
-            val diary = DiaryVO(date, weatherNum, moodNum, content)
-            viewModel.addDiary(diary)
+            val diary = DiaryVO(date, viewModel.diary.value?.weather, moodNum, content)
+            viewModel.addDiary(diary, {
+                Toast.makeText(context, "다이어리 저장 성공", Toast.LENGTH_SHORT).show()
+            }, {
+                Toast.makeText(context, "다이어리 저장 실패", Toast.LENGTH_SHORT).show()
+            })
         }
     }
 
