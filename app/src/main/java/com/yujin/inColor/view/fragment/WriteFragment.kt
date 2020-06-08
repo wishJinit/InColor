@@ -11,9 +11,11 @@ import com.yujin.inColor.databinding.FragmentWriteBinding
 import com.yujin.inColor.viewModel.DiaryViewModel
 import kotlinx.android.synthetic.main.fragment_write.*
 import java.util.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class WriteFragment(private val viewModel: DiaryViewModel) : BaseFragment<FragmentWriteBinding>() {
+class WriteFragment() : BaseFragment<FragmentWriteBinding>() {
+    override val viewModel by viewModel<DiaryViewModel>()
     override val layoutId: Int
         get() = R.layout.fragment_write
 

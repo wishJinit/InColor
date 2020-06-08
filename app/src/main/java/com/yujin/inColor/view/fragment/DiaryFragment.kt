@@ -18,13 +18,17 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>() {
 
     override val viewModel by viewModel<DiaryViewModel>()
 
-    private var year = 2019
-    private var month = 11
-
-
     override fun initSetting() {
+        setDataBinding()
         setDiary()
         setEventListener()
+    }
+
+    private fun setDataBinding() {
+        binding.let {
+            it.lifecycleOwner = this
+            it.viewModel = viewModel
+        }
     }
 
     private fun setDiary() {
@@ -34,7 +38,8 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>() {
             adapter = CalendarAdapter()
             layoutManager = StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL)
         }
-        viewModel.getMonthDiary(year, month) {
+        viewModel.getMonthDiary {
+            setDateText(viewModel.year, viewModel.month)
             hideProgressbar()
         }
     }
@@ -42,13 +47,9 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>() {
     private fun setEventListener() {
         select_date_text_view.setOnClickListener {
             context?.let { c ->
-                val dialog = SelectDateDialog(c, year, month) { _year, _month ->
-                    year = _year
-                    month = _month
-                    select_date_text_view.text = "${year}년 ${month+1}월"
-                    select_date_text_view.visibility = View.VISIBLE
-
-                    viewModel.getMonthDiary(year, month) {
+                val dialog = SelectDateDialog(c, viewModel.year, viewModel.month) { year, month ->
+                    setDateText(year, month)
+                    viewModel.setDate(year, month) {
                         hideProgressbar()
                     }
                 }
@@ -78,4 +79,8 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>() {
         progressbar.visibility = View.INVISIBLE
     }
 
+    private fun setDateText(year: Int, month: Int) {
+        select_date_text_view.text = "${year}년 ${month+1}월"
+        select_date_text_view.visibility = View.VISIBLE
+    }
 }

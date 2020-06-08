@@ -60,13 +60,13 @@ class SignupActivity : BaseActivity<ActivitySignupBinding, MemberViewModel>() {
                 viewModel.checkEmail(id, {
                     hideProgressBar()
                     enableCheckEmailButton()
-                    check_email_result_text_view.setText(R.string.notify_able_sign_up)
-                    isCheckEmail = true
+                    check_email_result_text_view.setText(R.string.notify_unable_sign_up)
+                    isCheckEmail = false
                 }, {
                     hideProgressBar()
                     enableCheckEmailButton()
-                    check_email_result_text_view.setText(R.string.notify_unable_sign_up)
-                    isCheckEmail = false
+                    check_email_result_text_view.setText(R.string.notify_able_sign_up)
+                    isCheckEmail = true
                 })
             }
         }

@@ -11,15 +11,33 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class DiaryViewModel(private val firebaseService: FirebaseService) : BaseViewModel() {
+    var year: Int
+    var month: Int
+
     private val _calendarList = MutableLiveData<ArrayList<CalendarVO>>()
     val calendarList: LiveData<ArrayList<CalendarVO>>
         get() = _calendarList
+
+
+    init {
+        val calendar = Calendar.getInstance()
+        year = calendar.get(Calendar.YEAR)
+        month = calendar.get(Calendar.MONTH)
+    }
 
     fun addDiary(diaryVO: DiaryVO) {
         firebaseService.addDiary(diaryVO)
     }
 
-    fun getMonthDiary(year:Int, month:Int, success:() -> Unit){
+    fun setDate(_year: Int, _month: Int, complete: () -> Unit) {
+        year = _year
+        month = _month
+        getMonthDiary {
+            complete()
+        }
+    }
+
+    fun getMonthDiary(success:() -> Unit){
         val calendar = Calendar.getInstance()
         calendar.set(year, month, 1, 0, 0, 0)
         val startDate = calendar.time
