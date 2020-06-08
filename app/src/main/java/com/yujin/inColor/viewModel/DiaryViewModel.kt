@@ -1,5 +1,6 @@
 package com.yujin.inColor.viewModel
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yujin.inColor.base.BaseViewModel
@@ -11,77 +12,53 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class DiaryViewModel(private val firebaseService: FirebaseService) : BaseViewModel() {
-    var year: Int
-    var month: Int
+    private val _year = MutableLiveData<Int>()
+    private val _month = MutableLiveData<Int>()
+    private val _day = MutableLiveData<Int>()
 
-    private val _calendarList = MutableLiveData<ArrayList<CalendarVO>>()
-    val calendarList: LiveData<ArrayList<CalendarVO>>
-        get() = _calendarList
+    val year: LiveData<Int>
+        get() = _year
+    val month: LiveData<Int>
+        get() = _month
+    val day: LiveData<Int>
+        get() = _day
+
+    private val _diary = MutableLiveData<DiaryVO>()
+    val diary: LiveData<DiaryVO>
+        get() = _diary
 
 
     init {
         val calendar = Calendar.getInstance()
-        year = calendar.get(Calendar.YEAR)
-        month = calendar.get(Calendar.MONTH)
+        _year.value = calendar.get(Calendar.YEAR)
+        _month.value = calendar.get(Calendar.MONTH)
+        _day.value = calendar.get(Calendar.DATE)
     }
 
-    fun addDiary(diaryVO: DiaryVO) {
-        firebaseService.addDiary(diaryVO)
+    fun addDiary(diaryVO: DiaryVO, success:() -> Unit, fail:() -> Unit) {
+        firebaseService.addDiary(diaryVO, success, fail)
     }
 
-    fun setDate(_year: Int, _month: Int, complete: () -> Unit) {
-        year = _year
-        month = _month
-        getMonthDiary {
-            complete()
-        }
-    }
-
-    fun getMonthDiary(success:() -> Unit){
-        val calendar = Calendar.getInstance()
-        calendar.set(year, month, 1, 0, 0, 0)
-        val startDate = calendar.time
-        calendar.set(year, month, calendar.getActualMaximum(Calendar.DAY_OF_MONTH), 0, 0, 0)
-        val finishDate = calendar.time
-
-        firebaseService.getMonthDiary(startDate, finishDate)
-            ?.addOnSuccessListener { result ->
-                val dateList = getCalendarList(year, month)
-                val diaryMap = HashMap<Int, DiaryVO>()
-                val calendarAl = ArrayList<CalendarVO>()
-
-                result.forEach { diary ->
-                    val date = diary.getDate("date")
-                    val weather = diary.getLong("weather")?.toInt()
-                    val moodColor = diary.getLong("mood_color")?.toInt()
-                    val content = diary.getString("content")
-
-                    date?.let {
-                        calendar.time = it
-                        diaryMap[calendar.get(Calendar.DATE)] = DiaryVO(it, weather, moodColor, content)
-                    }
+    fun getDateDiary(){
+        firebaseService.getDateDiary(year.value ?: 0, month.value ?: 0, day.value ?: 0)
+            ?.addOnSuccessListener {
+                if(it.size() > 0) {
+                    val result = it.documents[0]
+                    val date = result.getDate("date")
+                    val weather = result.getLong("weather")?.toInt()
+                    val moodColor = result.getLong("mood_color")?.toInt()
+                    val content = result.getString("content")
+                    val diaryVo = DiaryVO(date, weather, moodColor, content)
+                    _diary.value = diaryVo
                 }
-
-                dateList.forEach {
-                    if(it != 0) {
-                        calendarAl.add(CalendarVO(it, diaryMap[it]))
-                    }
-                }
-
-                _calendarList.value = calendarAl
-                success()
             }
     }
 
-    private fun getCalendarList(year: Int, month: Int): Array<Int>{
-        val cal = GregorianCalendar(year, month, 1)
-
-        val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK) - 1
-        val lastDayOfMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
-
-        val emptyDayArray = Array(dayOfWeek){ 0 }
-        val monthDayArray = Array(lastDayOfMonth) {i -> i + 1}
-
-        return emptyDayArray + monthDayArray
+    fun setWeatherCode(code: Int) {
+        _diary.value = _diary.value?.apply {
+            weather = code
+        } ?: {
+            DiaryVO(Calendar.getInstance().time, code, null, null)
+        }()
     }
 }

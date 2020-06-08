@@ -7,7 +7,7 @@ import com.yujin.inColor.R
 import com.yujin.inColor.view.dialog.SelectDateDialog
 import com.yujin.inColor.view.adapter.CalendarAdapter
 import com.yujin.inColor.databinding.FragmentDiaryBinding
-import com.yujin.inColor.viewModel.DiaryViewModel
+import com.yujin.inColor.viewModel.CalendarViewModel
 import kotlinx.android.synthetic.main.fragment_diary.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -16,7 +16,7 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_diary
 
-    override val viewModel by viewModel<DiaryViewModel>()
+    override val viewModel by viewModel<CalendarViewModel>()
 
     override fun initSetting() {
         setDataBinding()

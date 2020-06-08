@@ -13,7 +13,7 @@
             type="com.yujin.inColor.util.DiaryUtil"/>
         <variable
             name="viewModel"
-            type="com.yujin.inColor.viewModel.WriteViewModel" />
+            type="com.yujin.inColor.viewModel.DiaryViewModel" />
     </data>
 
     <LinearLayout
@@ -183,7 +183,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:src="@drawable/good"
                     android:layout_alignParentEnd="true"/>
 
@@ -207,7 +207,8 @@
                 android:inputType="textMultiLine"
                 android:scrollbars="vertical"
                 android:isScrollContainer="true"
-                android:background="@drawable/multiple_line_edittext"/>
+                android:background="@drawable/multiple_line_edittext"
+                android:text="@{viewModel.diary.content}"/>
         </LinearLayout>
 
         <Button

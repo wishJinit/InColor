@@ -2,6 +2,7 @@ package com.yujin.inColor.view.fragment
 
 import android.graphics.drawable.GradientDrawable
 import android.view.View
+import android.widget.Toast
 import com.yujin.inColor.base.BaseFragment
 import com.yujin.inColor.model.vo.DiaryVO
 
@@ -14,30 +15,15 @@ import java.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class WriteFragment() : BaseFragment<FragmentWriteBinding>() {
+class WriteFragment : BaseFragment<FragmentWriteBinding>() {
     override val viewModel by viewModel<DiaryViewModel>()
     override val layoutId: Int
         get() = R.layout.fragment_write
 
-    private val year: Int
-    private val month: Int
-    private val day: Int
-
-    private var weather: View? = null
-    private var weatherNum = 0
     private var mood: View? = null
     private var moodNum = 0
 
-    init {
-        val cal = GregorianCalendar()
-        year = cal.get(Calendar.YEAR)
-        month = cal.get(Calendar.MONTH) + 1
-        day = cal.get(Calendar.DATE)
-    }
-
     override fun initSetting() {
-        date_text_view.text = "${year}년 ${month}월 ${day}일 일기"
-
         setDataBinding()
         setEventListener()
         setMoodColor()

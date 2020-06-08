@@ -6,8 +6,8 @@ import java.util.*
 
 @Parcelize
 data class DiaryVO(
-    val date: Date,
-    val weather:Int?,
-    val moodColor:Int?,
-    val content: String?
+    var date: Date?,
+    var weather:Int?,
+    var moodColor:Int?,
+    var content: String?
 ): Parcelable

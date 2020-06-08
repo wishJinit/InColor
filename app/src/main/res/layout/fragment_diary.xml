@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.yujin.inColor.viewModel.DiaryViewModel" />
+            type="com.yujin.inColor.viewModel.CalendarViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
