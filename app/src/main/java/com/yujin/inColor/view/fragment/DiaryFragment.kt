@@ -8,16 +8,19 @@ import com.yujin.inColor.Model.VO.DiaryVO
 import com.yujin.inColor.R
 import com.yujin.inColor.view.dialog.SelectDateDialog
 import com.yujin.inColor.view.adapter.CalendarAdapter
-import com.yujin.inColor.viewModel.MemberViewModel
 import com.yujin.inColor.databinding.FragmentDiaryBinding
+import com.yujin.inColor.viewModel.DiaryViewModel
 import kotlinx.android.synthetic.main.fragment_diary.*
 import java.util.*
 import kotlin.collections.HashMap
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class DiaryFragment(private val viewModel: MemberViewModel) : BaseFragment<FragmentDiaryBinding>() {
+class DiaryFragment : BaseFragment<FragmentDiaryBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_diary
+
+    private val viewModel by viewModel<DiaryViewModel>()
 
     private lateinit var calendarAdapter: CalendarAdapter
     private var year = 2019

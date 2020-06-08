@@ -10,6 +10,6 @@ val viewModelModule = module {
         MemberViewModel(get())
     }
     viewModel {
-        DiaryViewModel()
+        DiaryViewModel(get())
     }
 }
