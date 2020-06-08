@@ -1,3 +1,3 @@
 package com.yujin.inColor.di
 
-val moduleList = arrayListOf(viewModelModule)
+val moduleList = arrayListOf(repositoryModule, viewModelModule)

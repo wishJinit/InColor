@@ -3,50 +3,23 @@ package com.yujin.inColor.view
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.yujin.inColor.Base.BaseActivity
 import com.yujin.inColor.R
 import com.yujin.inColor.util.ConfirmUtil
 import com.yujin.inColor.viewModel.MemberViewModel
 import com.yujin.inColor.databinding.ActivitySignupBinding
 import kotlinx.android.synthetic.main.activity_signup.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignupActivity : BaseActivity<ActivitySignupBinding, MemberViewModel>() {
-    override lateinit var viewModel: MemberViewModel
+    override val viewModel by viewModel<MemberViewModel>()
     override val layoutResourceId: Int
         get() = R.layout.activity_signup
 
     private var isCheckEmail = false
 
-    override fun initSetting() {
-        viewModel = ViewModelProviders.of(this)[MemberViewModel::class.java]
-        viewModel.resetResult()
-    }
-
-    override fun setDataBinding() { 
-        viewModel.signUpResult.observe(this, Observer { result ->
-            enableSignUpButton()
-            hideProgressBar()
-
-            if (result == 1) {
-                Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                finish()
-            } else if (result == 0) {
-                Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
-            }
-        })
-        viewModel.checkEmailResult.observe(this, Observer { result ->
-            hideProgressBar()
-            enableCheckEmailButton()
-            if (result == 1) {
-                check_email_result_text_view.setText(R.string.notify_unable_sign_up)
-                isCheckEmail = false
-            } else if (result == 0) {
-                check_email_result_text_view.setText(R.string.notify_able_sign_up)
-                isCheckEmail = true
-            }
-        })
-    }
+    override fun initSetting() {}
+    override fun setDataBinding() {}
 
     override fun afterDataBinding() {
         setEventListener()
@@ -85,7 +58,17 @@ class SignupActivity : BaseActivity<ActivitySignupBinding, MemberViewModel>() {
                 showProgressBar()
                 disableCheckEmailButton()
 
-                viewModel.checkEmail(id)
+                viewModel.checkEmail(id, {
+                    hideProgressBar()
+                    enableCheckEmailButton()
+                    check_email_result_text_view.setText(R.string.notify_able_sign_up)
+                    isCheckEmail = true
+                }, {
+                    hideProgressBar()
+                    enableCheckEmailButton()
+                    check_email_result_text_view.setText(R.string.notify_unable_sign_up)
+                    isCheckEmail = false
+                })
             }
         }
 
@@ -104,7 +87,14 @@ class SignupActivity : BaseActivity<ActivitySignupBinding, MemberViewModel>() {
         val id = id_edit_text.text.toString()
         val pw = pw_edit_text.text.toString()
 
-        viewModel.signUp(name, id, pw)
+        viewModel.signUp(name, id, pw, {
+            Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+            finish()
+        }, {
+            enableSignUpButton()
+            hideProgressBar()
+            Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
+        })
     }
 
     private fun enableCheckEmailButton(){

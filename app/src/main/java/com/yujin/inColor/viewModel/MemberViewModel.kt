@@ -13,15 +13,7 @@ import com.yujin.inColor.Model.SaveSharedPreference
 import java.util.*
 
 
-class MemberViewModel : BaseViewModel(){
-    private val firebaseService = FirebaseService()
-
-    companion object {
-        const val success = 1
-        const val fail = 0
-        const val default = -1
-    }
-
+class MemberViewModel(private val firebaseService: FirebaseService) : BaseViewModel(){
     private val _userVO = MutableLiveData<UserVO>()
     val userVO: LiveData<UserVO>
         get() = _userVO
@@ -30,35 +22,17 @@ class MemberViewModel : BaseViewModel(){
     val diaryDocuments: LiveData<QuerySnapshot>
         get() = _diaryDocuments
 
-    private val _signUpResult = MutableLiveData<Int>()
-    val signUpResult: LiveData<Int>
-        get() = _signUpResult
 
-    private val _sendEmailResult = MutableLiveData<Int>()
-    val sendEmailResult: LiveData<Int>
-        get() = _sendEmailResult
-
-    private val _checkEmailResult = MutableLiveData<Int>()
-    val checkEmailResult: LiveData<Int>
-        get() = _checkEmailResult
-
-    fun resetResult(){
-        _signUpResult.value = default
-        _sendEmailResult.value = default
-        _checkEmailResult.value = default
-    }
-
-    fun signUp(name:String, email:String, pw:String){
+    fun signUp(name:String, email:String, pw:String, success: () -> Unit, fail: () -> Unit){
         firebaseService.createUser(name, email, pw)
             .addOnCompleteListener {
-                _signUpResult.value =
-                    when (it.isSuccessful) {
-                        true -> {
-                            firebaseService.setName(name)
-                            success
-                        }
-                        false -> fail
+                when (it.isSuccessful) {
+                    true -> {
+                        firebaseService.setName(name)
+                        success()
                     }
+                    false -> fail()
+                }
             }
     }
 
@@ -76,28 +50,27 @@ class MemberViewModel : BaseViewModel(){
             }
     }
 
-    fun sendPasswordResetEmail(email:String){
+    fun sendPasswordResetEmail(email:String, success: () -> Unit, fail: () -> Unit){
         firebaseService.sendPasswordResetEmail(email)
             .addOnCompleteListener {
-                _sendEmailResult.value = when(it.isSuccessful) {
-                    true -> success
-                    false -> fail
+                when(it.isSuccessful) {
+                    true -> success()
+                    false -> fail()
                 }
             }
     }
 
-    fun checkEmail(email:String){
+    fun checkEmail(email:String, success: () -> Unit, fail: () -> Unit){
         firebaseService.checkEmail(email)
             .addOnCompleteListener {
-                _checkEmailResult.value =
                     if (it.isSuccessful) {
                         if (it.result?.signInMethods?.contains(EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD) == true) {
-                            success
+                            success()
                         } else {
-                            fail
+                            fail()
                         }
                     } else {
-                        fail
+                        fail()
                     }
             }
     }
