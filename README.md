@@ -69,7 +69,7 @@
         <th align = center>작성된 일기 확인</th>
     </tr>
     <tr>
-        <td><img src = "https://user-images.githubusercontent.com/52834095/84044735-e81ae080-a9e2-11ea-8058-5e97cb5c54ff.jpg" /></td>
+        <td><img src = "https://user-images.githubusercontent.com/52834095/84066034-4c986880-aa00-11ea-96be-e1b537762e12.jpg" /></td>
         <td><img src = "https://user-images.githubusercontent.com/52834095/84044902-1ef0f680-a9e3-11ea-9bc3-9a7fc05ac602.jpg" /></td>
         <td><img src = "https://user-images.githubusercontent.com/52834095/84045236-83ac5100-a9e3-11ea-8385-8899eeffb5af.jpg" /></td>
     </tr>
