@@ -6,7 +6,7 @@ import java.util.*
 
 @Parcelize
 data class DiaryVO(
-    val date: Date?,
+    val date: Date,
     val weather:Int?,
     val moodColor:Int?,
     val content: String?
