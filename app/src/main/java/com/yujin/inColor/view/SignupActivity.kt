@@ -2,8 +2,7 @@ package com.yujin.inColor.view
 
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.Observer
-import com.yujin.inColor.Base.BaseActivity
+import com.yujin.inColor.base.BaseActivity
 import com.yujin.inColor.R
 import com.yujin.inColor.util.ConfirmUtil
 import com.yujin.inColor.viewModel.MemberViewModel

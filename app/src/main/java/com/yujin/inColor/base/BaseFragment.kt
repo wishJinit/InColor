@@ -1,4 +1,4 @@
-package com.yujin.inColor.Base
+package com.yujin.inColor.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment<viewDataBinding: ViewDataBinding> : Fragment() {
     protected lateinit var binding: viewDataBinding
+    abstract val viewModel: BaseViewModel
     abstract val layoutId: Int
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

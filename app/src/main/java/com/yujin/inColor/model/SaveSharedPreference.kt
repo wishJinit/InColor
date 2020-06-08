@@ -1,4 +1,4 @@
-package com.yujin.inColor.Model
+package com.yujin.inColor.model
 
 import android.content.Context
 import android.content.SharedPreferences

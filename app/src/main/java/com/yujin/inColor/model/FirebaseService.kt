@@ -1,10 +1,10 @@
-package com.yujin.inColor.Model
+package com.yujin.inColor.model
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
-import com.yujin.inColor.Model.VO.DiaryVO
+import com.yujin.inColor.model.vo.DiaryVO
 import com.yujin.inColor.util.DLog
 import java.util.*
 

@@ -1,4 +1,4 @@
-package com.yujin.inColor.Model.VO
+package com.yujin.inColor.model.vo
 
 data class UserVO(
     val id:String,

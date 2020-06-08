@@ -2,11 +2,10 @@ package com.yujin.inColor.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.QuerySnapshot
-import com.yujin.inColor.Base.BaseViewModel
-import com.yujin.inColor.Model.FirebaseService
-import com.yujin.inColor.Model.VO.CalendarVO
-import com.yujin.inColor.Model.VO.DiaryVO
+import com.yujin.inColor.base.BaseViewModel
+import com.yujin.inColor.model.FirebaseService
+import com.yujin.inColor.model.vo.CalendarVO
+import com.yujin.inColor.model.vo.DiaryVO
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap

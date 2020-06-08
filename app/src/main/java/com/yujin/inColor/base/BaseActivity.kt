@@ -1,4 +1,4 @@
-package com.yujin.inColor.Base
+package com.yujin.inColor.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

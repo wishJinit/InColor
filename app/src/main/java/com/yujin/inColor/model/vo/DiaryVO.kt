@@ -1,4 +1,4 @@
-package com.yujin.inColor.Model.VO
+package com.yujin.inColor.model.vo
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

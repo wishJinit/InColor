@@ -4,7 +4,7 @@ import android.content.Intent
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.yujin.inColor.Base.BaseActivity
+import com.yujin.inColor.base.BaseActivity
 import com.yujin.inColor.R
 import com.yujin.inColor.viewModel.MemberViewModel
 import com.yujin.inColor.databinding.ActivityMainBinding

@@ -2,7 +2,7 @@ package com.yujin.inColor.view.fragment
 
 import android.view.View
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.yujin.inColor.Base.BaseFragment
+import com.yujin.inColor.base.BaseFragment
 import com.yujin.inColor.R
 import com.yujin.inColor.view.dialog.SelectDateDialog
 import com.yujin.inColor.view.adapter.CalendarAdapter
@@ -16,9 +16,8 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_diary
 
-    private val viewModel by viewModel<DiaryViewModel>()
+    override val viewModel by viewModel<DiaryViewModel>()
 
-    private lateinit var calendarAdapter: CalendarAdapter
     private var year = 2019
     private var month = 11
 
@@ -30,13 +29,9 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>() {
 
     private fun setDiary() {
         showProgressbar()
-        calendarAdapter = CalendarAdapter(
-            arrayOf(),
-            mapOf()
-        )
 
         calendar_recycler_view.run{
-            adapter = calendarAdapter
+            adapter = CalendarAdapter()
             layoutManager = StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL)
         }
         viewModel.getMonthDiary(year, month) {

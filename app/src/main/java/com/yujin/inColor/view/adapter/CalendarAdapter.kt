@@ -1,9 +1,9 @@
 package com.yujin.inColor.view.adapter
 
 import android.view.View
-import com.yujin.inColor.Base.BaseAdapter
-import com.yujin.inColor.Base.BaseViewHolder
-import com.yujin.inColor.Model.VO.CalendarVO
+import com.yujin.inColor.base.BaseAdapter
+import com.yujin.inColor.base.BaseViewHolder
+import com.yujin.inColor.model.vo.CalendarVO
 import com.yujin.inColor.R
 import com.yujin.inColor.view.viewHolder.CalendarViewHolder
 

@@ -1,20 +1,13 @@
 package com.yujin.inColor.view.fragment
 
 import android.graphics.drawable.GradientDrawable
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import com.yujin.inColor.Base.BaseFragment
-import com.yujin.inColor.Model.VO.DiaryVO
+import com.yujin.inColor.base.BaseFragment
+import com.yujin.inColor.model.vo.DiaryVO
 
 import com.yujin.inColor.R
 import com.yujin.inColor.util.ColorUtil
-import com.yujin.inColor.viewModel.MemberViewModel
 import com.yujin.inColor.databinding.FragmentWriteBinding
-import com.yujin.inColor.util.DiaryUtil
 import com.yujin.inColor.viewModel.DiaryViewModel
 import kotlinx.android.synthetic.main.fragment_write.*
 import java.util.*

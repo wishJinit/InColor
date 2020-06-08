@@ -1,4 +1,4 @@
-package com.yujin.inColor.Base
+package com.yujin.inColor.base
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

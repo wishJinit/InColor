@@ -3,10 +3,10 @@ package com.yujin.inColor.viewModel
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.EmailAuthProvider
-import com.yujin.inColor.Base.BaseViewModel
-import com.yujin.inColor.Model.FirebaseService
-import com.yujin.inColor.Model.VO.UserVO
-import com.yujin.inColor.Model.SaveSharedPreference
+import com.yujin.inColor.base.BaseViewModel
+import com.yujin.inColor.model.FirebaseService
+import com.yujin.inColor.model.vo.UserVO
+import com.yujin.inColor.model.SaveSharedPreference
 
 
 class MemberViewModel(private val firebaseService: FirebaseService) : BaseViewModel(){

@@ -3,7 +3,7 @@ package com.yujin.inColor.view
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
-import com.yujin.inColor.Base.BaseActivity
+import com.yujin.inColor.base.BaseActivity
 import com.yujin.inColor.R
 import com.yujin.inColor.util.ConfirmUtil
 import com.yujin.inColor.util.DLog

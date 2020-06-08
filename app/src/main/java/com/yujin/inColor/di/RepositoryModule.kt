@@ -1,6 +1,6 @@
 package com.yujin.inColor.di
 
-import com.yujin.inColor.Model.FirebaseService
+import com.yujin.inColor.model.FirebaseService
 import org.koin.dsl.module
 
 val repositoryModule = module {

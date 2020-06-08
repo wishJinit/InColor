@@ -4,9 +4,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
-import com.yujin.inColor.Base.BaseViewHolder
-import com.yujin.inColor.Model.VO.CalendarVO
-import com.yujin.inColor.Model.VO.DiaryVO
+import com.yujin.inColor.base.BaseViewHolder
+import com.yujin.inColor.model.vo.CalendarVO
 import com.yujin.inColor.util.ColorUtil
 import com.yujin.inColor.view.DiaryActivity
 import kotlinx.android.synthetic.main.calendar_day_cell.view.*

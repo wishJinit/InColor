@@ -1,4 +1,4 @@
-package com.yujin.inColor.Base
+package com.yujin.inColor.base
 
 import androidx.lifecycle.ViewModel
 
