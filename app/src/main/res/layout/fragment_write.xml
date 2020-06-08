@@ -11,6 +11,9 @@
         <variable
             name="model"
             type="com.yujin.inColor.util.DiaryUtil"/>
+        <variable
+            name="viewModel"
+            type="com.yujin.inColor.viewModel.WriteViewModel" />
     </data>
 
     <LinearLayout
@@ -24,10 +27,10 @@
             android:id="@+id/date_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2019년 12월 1일 일기"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="25dp"/>
+            android:layout_marginBottom="25dp"
+            tools:text="2019년 12월 1일 일기"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -41,15 +44,15 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/weather_text_view"
-                android:layout_alignParentRight="true">
+                android:layout_toEndOf="@id/weather_text_view"
+                android:layout_alignParentEnd="true">
 
                 <ImageView
                     android:id="@+id/sun_image_view"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@drawable/sun_btn"
+                    android:src="@drawable/button_sun"
                     android:onClick="@{(v)-> activity.selectWeather(v, model.weatherSun)}"/>
 
                 <ImageView
@@ -57,7 +60,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@drawable/cloud_btn"
+                    android:src="@drawable/button_cloud"
                     android:onClick="@{(v)-> activity.selectWeather(v, model.weatherCloud)}" />
 
 
@@ -66,7 +69,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@drawable/rain_btn"
+                    android:src="@drawable/button_rain"
                     android:onClick="@{(v)-> activity.selectWeather(v, model.weatherRain)}" />
 
 
@@ -75,7 +78,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@drawable/wind_btn"
+                    android:src="@drawable/button_wind"
                     android:onClick="@{(v)-> activity.selectWeather(v, model.weatherWind)}" />
 
 
@@ -84,7 +87,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@drawable/snow_btn"
+                    android:src="@drawable/button_snow"
                     android:onClick="@{(v)-> activity.selectWeather(v, model.weatherSnow)}" />
 
 
@@ -93,7 +96,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@drawable/lighting_btn"
+                    android:src="@drawable/button_light"
                     android:onClick="@{(v)-> activity.selectWeather(v, model.weatherLight)}" />
             </LinearLayout>
         </RelativeLayout>
@@ -110,22 +113,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:layout_toRightOf="@id/mood_text_view" >
+                android:layout_toEndOf="@id/mood_text_view" >
 
                 <ImageView
                     android:id="@+id/bad_image_view"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/bad"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/mood_list_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/bad_image_view"
-                    android:layout_toLeftOf="@id/good_image_view"
+                    android:layout_toEndOf="@id/bad_image_view"
+                    android:layout_toStartOf="@id/good_image_view"
                     >
 
                     <View
@@ -180,9 +183,9 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/good"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentEnd="true"/>
 
             </RelativeLayout>
         </RelativeLayout>
@@ -200,7 +203,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:gravity="top"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:inputType="textMultiLine"
                 android:scrollbars="vertical"
                 android:isScrollContainer="true"
