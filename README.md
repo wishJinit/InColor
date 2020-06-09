@@ -34,7 +34,7 @@
 
 
 
-  ## InColor Git Management 💬
+## InColor Git Management 💬
 
  ### Commit Message 규칙
 
@@ -50,7 +50,7 @@
 
 
 
-  ## InColor 완성본 📸
+## InColor 완성본 📸
 
 <table>
     <tr>
@@ -59,7 +59,7 @@
         <th align = center>로그인</th>
     </tr>
     <tr>
-        <td><img src = "https://user-images.githubusercontent.com/52834095/84044735-e81ae080-a9e2-11ea-8058-5e97cb5c54ff.jpg" /></td>
+        <td><img src = "https://user-images.githubusercontent.com/52834095/84109929-cd864d00-aa5e-11ea-944c-de821c6754b5.jpg" /></td>
         <td><img src = "https://user-images.githubusercontent.com/52834095/84044686-d9342e00-a9e2-11ea-8312-496adf71b258.jpg" /></td>
         <td><img src = "https://user-images.githubusercontent.com/52834095/84044519-a7bb6280-a9e2-11ea-8ddb-2e9212934f17.jpg" /></td>
     </tr>
