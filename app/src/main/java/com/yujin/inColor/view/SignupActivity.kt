@@ -2,11 +2,16 @@ package com.yujin.inColor.view
 
 import android.view.View
 import android.widget.Toast
+import com.jakewharton.rxbinding4.view.clicks
+import com.jakewharton.rxbinding4.widget.textChanges
 import com.yujin.inColor.base.BaseActivity
 import com.yujin.inColor.R
 import com.yujin.inColor.util.ConfirmUtil
 import com.yujin.inColor.viewModel.MemberViewModel
 import com.yujin.inColor.databinding.ActivitySignupBinding
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.functions.Function5
+import io.reactivex.rxjava3.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_signup.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -14,8 +19,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding, MemberViewModel>() {
     override val viewModel by viewModel<MemberViewModel>()
     override val layoutResourceId: Int
         get() = R.layout.activity_signup
-
-    private var isCheckEmail = false
 
     override fun initSetting() {}
     override fun setDataBinding() {}
@@ -25,50 +28,59 @@ class SignupActivity : BaseActivity<ActivitySignupBinding, MemberViewModel>() {
     }
 
     private fun setEventListener(){
-        sign_up_button.setOnClickListener {
-            val name = name_edit_text.text.toString()
-            val id = id_edit_text.text.toString()
-            val pw = pw_edit_text.text.toString()
-            val checkPw = check_pw_edit_text.text.toString()
+        val nameCheckObservable = name_edit_text.textChanges()
+            .map { it.isNotEmpty() }
+        val idCheckObservable = id_edit_text.textChanges()
+            .map { it.isNotEmpty() && ConfirmUtil.isEmailValid(it.toString()) }
+        val pwCheckObservable = pw_edit_text.textChanges()
+            .map { it.isNotEmpty() && it.length >= 6 }
+        val checkPwCheckObservable = check_pw_edit_text.textChanges()
+            .map { it.isNotEmpty() && checkPassword() }
+        val checkEmailObservable = PublishSubject.create<Boolean>()
 
-            if(ConfirmUtil.isEmptyField(name, id, pw, checkPw)){
-                Toast.makeText(this, "모든 항목 입력해주세요.", Toast.LENGTH_SHORT).show()
-            } else if (!ConfirmUtil.isEmailValid(id)){
-                Toast.makeText(this, "올바른 이메일 형식이 아닙니다.", Toast.LENGTH_SHORT).show()
-            } else if (!checkPassword()){
-                Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
-            } else if (!isCheckEmail){
-                Toast.makeText(this, "이메일 중복확인을 해주세요.", Toast.LENGTH_SHORT).show()
-            } else {
-                createUser()
-            }
+        pwCheckObservable.subscribe {
+            check_pw_tv.visibility = if (it) View.GONE else View.VISIBLE
+        }
+        checkPwCheckObservable.subscribe {
+            check_pw_confirm_tv.visibility = if (it) View.GONE else View.VISIBLE
+        }
+        nameCheckObservable.subscribe {
+            check_name_tv.visibility = if (it) View.GONE else View.VISIBLE
+        }
+        idCheckObservable.subscribe {
+            val res = if(it) R.string.notify_need_email_check else R.string.notify_check_email
+            check_email_result_text_view.setText(res)
+            checkEmailObservable.onNext(false)
+        }
+        check_email_btn.clicks().subscribe {
+            showProgressBar()
+            disableCheckEmailButton()
+
+            viewModel.checkEmail(id_edit_text.text.toString(), {
+                hideProgressBar()
+                enableCheckEmailButton()
+                check_email_result_text_view.setText(R.string.notify_unable_sign_up)
+                checkEmailObservable.onNext(false)
+            }, {
+                hideProgressBar()
+                enableCheckEmailButton()
+                check_email_result_text_view.setText(R.string.notify_able_sign_up)
+                checkEmailObservable.onNext(true)
+            })
         }
 
-        check_email_btn.setOnClickListener {
-            val id = id_edit_text.text.toString()
-            val resultTextView = check_email_result_text_view
-            resultTextView.visibility = View.VISIBLE
+        Observable.combineLatest(
+            nameCheckObservable,
+            idCheckObservable,
+            pwCheckObservable,
+            checkPwCheckObservable,
+            checkEmailObservable,
+            Function5 { nc: Boolean, ic: Boolean, pc: Boolean, cpc: Boolean, ec: Boolean ->
+                sign_up_button.isEnabled = nc && ic && pc && cpc && ec
+            }).subscribe()
 
-            if (ConfirmUtil.isEmptyField(id)) {
-                resultTextView.setText(R.string.notify_fill_out_email)
-            } else if (!ConfirmUtil.isEmailValid(id)){
-                resultTextView.setText(R.string.notify_check_email)
-            } else {
-                showProgressBar()
-                disableCheckEmailButton()
-
-                viewModel.checkEmail(id, {
-                    hideProgressBar()
-                    enableCheckEmailButton()
-                    check_email_result_text_view.setText(R.string.notify_unable_sign_up)
-                    isCheckEmail = false
-                }, {
-                    hideProgressBar()
-                    enableCheckEmailButton()
-                    check_email_result_text_view.setText(R.string.notify_able_sign_up)
-                    isCheckEmail = true
-                })
-            }
+        sign_up_button.setOnClickListener {
+            createUser()
         }
 
         back_btn.setOnClickListener {

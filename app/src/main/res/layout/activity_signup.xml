@@ -62,6 +62,14 @@
                         android:layout_height="50dp"
                         android:hint="@string/name"
                         style="@style/CustomEditText"/>
+                    <TextView
+                        android:id="@+id/check_name_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:visibility="gone"
+                        android:text="@string/notify_fill_out"
+                        tools:visibility="visible"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -92,7 +100,7 @@
                             android:layout_height="35dp"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
                             android:text="@string/check_email"
                             style="@style/SmallCustomButton"/>
                     </RelativeLayout>
@@ -102,7 +110,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:visibility="gone"/>
+                        android:visibility="visible"
+                        tools:text="@string/notify_able_sign_up"
+                        tools:visibility="visible" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -122,6 +132,15 @@
                         android:layout_height="50dp"
                         android:hint="@string/password"
                         style="@style/PasswordEditText"/>
+
+                    <TextView
+                        android:id="@+id/check_pw_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:visibility="gone"
+                        android:text="@string/notify_pw"
+                        tools:visibility="visible"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -141,6 +160,15 @@
                         android:layout_height="50dp"
                         android:hint="@string/check_password"
                         style="@style/PasswordEditText"/>
+
+                    <TextView
+                        android:id="@+id/check_pw_confirm_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:visibility="gone"
+                        android:text="@string/notify_pw_not_same"
+                        tools:visibility="visible"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -160,6 +188,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/sign_up"
+                android:enabled="false"
                 style="@style/CustomButton" />
         </RelativeLayout>
         <ProgressBar
