@@ -30,7 +30,7 @@
 - [Koin](https://github.com/InsertKoinIO/koin) : DI (Dependency Injection)
 - [Firebase Authentication](https://firebase.google.com/docs/auth) : 이메일을 이용한 간편 로그인
 - [Cloud FireStore (NoSQL Cloud Database)](https://firebase.google.com/docs/firestore) : 클라이언트 데이터 저장
-
+- [RxJava](https://github.com/ReactiveX/RxJava), [RxAndroid](https://github.com/ReactiveX/RxAndroid), [RxBinding](https://github.com/JakeWharton/RxBinding) : 회원가입 입력폼 가이드
 
 
 
@@ -80,4 +80,5 @@
 
 
 _E-mail : wishjinit@gmail.com_
+
 _Last Update : 2020.06.09_
