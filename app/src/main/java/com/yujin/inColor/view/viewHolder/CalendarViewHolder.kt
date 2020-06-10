@@ -24,7 +24,7 @@ class CalendarViewHolder(val view : View) : BaseViewHolder<CalendarVO>(view) {
                     )
                 view.setOnClickListener {
                     val intent = Intent(view.context, DiaryActivity::class.java)
-                    intent.putExtra("Diary", diary)
+                    intent.putExtra(DiaryActivity.DIARY, diary)
                     view.context.startActivity(intent)
                 }
             }

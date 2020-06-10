@@ -45,7 +45,7 @@ class FindPasswordActivity : BaseActivity<ActivityFindPasswordBinding, MemberVie
                 }, {
                     hideProgressBar()
                     enableSendMailButton()
-                    Toast.makeText(this, "등록된 회원이 아니거나 메일 전송 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "등록된 회원이 아니거나 메일 전송에 실패하였습니다.", Toast.LENGTH_SHORT).show()
                 })
             }
         }

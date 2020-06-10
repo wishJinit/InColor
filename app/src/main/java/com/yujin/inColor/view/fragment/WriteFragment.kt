@@ -86,15 +86,6 @@ class WriteFragment : BaseFragment<FragmentWriteBinding>() {
         }
     }
 
-    fun selectWeather(v: View, _weatherNum: Int){
-        weather?.let {
-            it.isSelected = false
-        }
-        v.isSelected = true
-        weather = v
-        weatherNum = _weatherNum
-    }
-
     fun selectMoodColor(v: View, _moodNum: Int){
         mood?.let {
             it.isSelected = false
