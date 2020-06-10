@@ -23,14 +23,51 @@
         android:paddingHorizontal="15dp"
         android:paddingVertical="10dp">
 
-        <TextView
-            android:id="@+id/date_text_view"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="25dp"
-            tools:text="2019년 12월 1일 일기"/>
+            android:layout_marginBottom="25dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="@{viewModel.year.toString()}"
+                tools:text="2019"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="@string/year"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="@{String.valueOf(viewModel.month+1)}"
+                tools:text="11"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="@string/month"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="@{viewModel.day.toString()}"
+                tools:text="11"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="@string/day"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="@string/content"/>
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -204,11 +241,14 @@
                 android:layout_height="300dp"
                 android:gravity="top"
                 android:textSize="14sp"
+                android:padding="7dp"
                 android:inputType="textMultiLine"
+                android:lineSpacingMultiplier="1.3"
                 android:scrollbars="vertical"
                 android:isScrollContainer="true"
                 android:background="@drawable/multiple_line_edittext"
-                android:text="@{viewModel.diary.content}"/>
+                android:text="@{viewModel.diary.content}"
+                tools:text="일기"/>
         </LinearLayout>
 
         <Button

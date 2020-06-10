@@ -54,9 +54,7 @@ class CalendarViewModel(private val firebaseService: FirebaseService) : BaseView
                 }
 
                 dateList.forEach {
-                    if(it != 0) {
-                        calendarAl.add(CalendarVO(it, diaryMap[it]))
-                    }
+                    calendarAl.add(CalendarVO(it, diaryMap[it]))
                 }
 
                 _calendarList.value = calendarAl
