@@ -90,7 +90,8 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:src="@drawable/button_sun"
-                    android:onClick="@{(v)-> activity.selectWeather(v, model.weatherSun)}"/>
+                    android:onClick="@{(v) ->viewModel.setWeatherCode(model.weatherSun)}"
+                    app:isSelected="@{model.weatherSun == viewModel.diary.weather}"/>
 
                 <ImageView
                     android:id="@+id/cloud_image_view"
@@ -98,7 +99,8 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:src="@drawable/button_cloud"
-                    android:onClick="@{(v)-> activity.selectWeather(v, model.weatherCloud)}" />
+                    android:onClick="@{(v) ->viewModel.setWeatherCode(model.weatherCloud)}"
+                    app:isSelected="@{model.weatherCloud == viewModel.diary.weather}" />
 
 
                 <ImageView
@@ -107,7 +109,8 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:src="@drawable/button_rain"
-                    android:onClick="@{(v)-> activity.selectWeather(v, model.weatherRain)}" />
+                    android:onClick="@{(v) ->viewModel.setWeatherCode(model.weatherRain)}"
+                    app:isSelected="@{model.weatherRain == viewModel.diary.weather}" />
 
 
                 <ImageView
@@ -116,7 +119,8 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:src="@drawable/button_wind"
-                    android:onClick="@{(v)-> activity.selectWeather(v, model.weatherWind)}" />
+                    android:onClick="@{(v) ->viewModel.setWeatherCode(model.weatherWind)}"
+                    app:isSelected="@{model.weatherWind == viewModel.diary.weather}" />
 
 
                 <ImageView
@@ -125,7 +129,8 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:src="@drawable/button_snow"
-                    android:onClick="@{(v)-> activity.selectWeather(v, model.weatherSnow)}" />
+                    android:onClick="@{(v) ->viewModel.setWeatherCode(model.weatherSnow)}"
+                    app:isSelected="@{model.weatherSnow == viewModel.diary.weather}" />
 
 
                 <ImageView
@@ -134,7 +139,8 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:src="@drawable/button_light"
-                    android:onClick="@{(v)-> activity.selectWeather(v, model.weatherLight)}" />
+                    android:onClick="@{(v) ->viewModel.setWeatherCode(model.weatherLight)}"
+                    app:isSelected="@{model.weatherLight == viewModel.diary.weather}" />
             </LinearLayout>
         </RelativeLayout>
 
