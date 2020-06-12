@@ -47,6 +47,9 @@ captures/
 .idea/assetWizardSettings.xml
 .idea/dictionaries
 .idea/libraries
+
+.idea/
+
 # Android Studio 3 in .gitignore file.
 .idea/caches
 .idea/modules.xml
@@ -131,3 +134,6 @@ hs_err_pid*
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 
 # End of https://www.gitignore.io/api/java,kotlin,android
+.gitsecret/keys/random_seed
+!*.secret
+app/google-services.json
